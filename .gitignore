@@ -1,27 +1,12 @@
-﻿# Python
-__pycache__/
+﻿__pycache__/
 *.pyc
 .venv/
-
-# Editors
 .vscode/
-.idea/
-
-# RTL simulation
 *.vcd
 *.fst
 *.vvp
 dds_test
 obj_dir/
-
-# Build artifacts
 build/
 dist/
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Secrets
 .env
-.env.local
