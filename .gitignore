@@ -13,3 +13,6 @@ dist/
 
 # Sprint 02 simulation executables
 *_test
+
+# Generated verification captures
+plots/*_capture.csv
