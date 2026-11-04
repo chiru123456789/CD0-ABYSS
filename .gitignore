@@ -10,3 +10,6 @@ obj_dir/
 build/
 dist/
 .env
+
+# Sprint 02 simulation executables
+*_test
