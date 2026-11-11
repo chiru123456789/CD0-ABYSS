@@ -16,3 +16,7 @@ dist/
 
 # Generated verification captures
 plots/*_capture.csv
+
+# Generated synthesis logs
+/lfm_controller_synth.log
+/lfm_wavecore_synth.log
