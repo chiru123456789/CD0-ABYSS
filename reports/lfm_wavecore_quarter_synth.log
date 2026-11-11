@@ -1,0 +1,1023 @@
+
+-- Running command `
+read_verilog rtl/lfm_chirp_controller.sv rtl/dds_sine_rom_quarter.sv rtl/lfm_wavecore_quarter.sv
+hierarchy -check -top lfm_wavecore_quarter
+synth -top lfm_wavecore_quarter -flatten
+check
+stat
+' --
+
+1. Executing Verilog-2005 frontend: rtl/lfm_chirp_controller.sv
+Parsing Verilog input from `rtl/lfm_chirp_controller.sv' to AST representation.
+Generating RTLIL representation for module `\lfm_chirp_controller'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: rtl/dds_sine_rom_quarter.sv
+Parsing Verilog input from `rtl/dds_sine_rom_quarter.sv' to AST representation.
+Generating RTLIL representation for module `\dds_sine_rom_quarter'.
+Successfully finished Verilog frontend.
+
+3. Executing Verilog-2005 frontend: rtl/lfm_wavecore_quarter.sv
+Parsing Verilog input from `rtl/lfm_wavecore_quarter.sv' to AST representation.
+Generating RTLIL representation for module `\lfm_wavecore_quarter'.
+Successfully finished Verilog frontend.
+
+4. Executing HIERARCHY pass (managing design hierarchy).
+
+4.1. Analyzing design hierarchy..
+Top module:  \lfm_wavecore_quarter
+Used module:     \dds_sine_rom_quarter
+Used module:     \lfm_chirp_controller
+
+4.2. Analyzing design hierarchy..
+Top module:  \lfm_wavecore_quarter
+Used module:     \dds_sine_rom_quarter
+Used module:     \lfm_chirp_controller
+Removed 0 unused modules.
+
+5. Executing SYNTH pass.
+
+5.1. Executing HIERARCHY pass (managing design hierarchy).
+
+5.1.1. Analyzing design hierarchy..
+Top module:  \lfm_wavecore_quarter
+Used module:     \dds_sine_rom_quarter
+Used module:     \lfm_chirp_controller
+
+5.1.2. Analyzing design hierarchy..
+Top module:  \lfm_wavecore_quarter
+Used module:     \dds_sine_rom_quarter
+Used module:     \lfm_chirp_controller
+Removed 0 unused modules.
+
+5.2. Executing PROC pass (convert processes to netlists).
+
+5.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `dds_sine_rom_quarter.$proc$rtl/dds_sine_rom_quarter.sv:0$16'.
+Cleaned up 0 empty switches.
+
+5.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 2 switch rules as full_case in process $proc$rtl/lfm_wavecore_quarter.sv:37$17 in module lfm_wavecore_quarter.
+Marked 3 switch rules as full_case in process $proc$rtl/lfm_chirp_controller.sv:15$1 in module lfm_chirp_controller.
+Removed a total of 0 dead cases.
+
+5.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 1 redundant assignment.
+Promoted 0 assignments to connections.
+
+5.2.4. Executing PROC_INIT pass (extract init attributes).
+
+5.2.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \rst_n in `\lfm_wavecore_quarter.$proc$rtl/lfm_wavecore_quarter.sv:37$17'.
+Found async reset \rst_n in `\lfm_chirp_controller.$proc$rtl/lfm_chirp_controller.sv:15$1'.
+
+5.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~5 debug messages>
+
+5.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\lfm_wavecore_quarter.$proc$rtl/lfm_wavecore_quarter.sv:37$17'.
+     1/1: $0\phase_accumulator[31:0]
+Creating decoders for process `\lfm_chirp_controller.$proc$rtl/lfm_chirp_controller.sv:15$1'.
+     1/4: $0\done[0:0]
+     2/4: $0\samples_remaining[15:0]
+     3/4: $0\active[0:0]
+     4/4: $0\frequency_word[31:0]
+
+5.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+5.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\lfm_wavecore_quarter.\phase_accumulator' using process `\lfm_wavecore_quarter.$proc$rtl/lfm_wavecore_quarter.sv:37$17'.
+  created $adff cell `$procdff$58' with positive edge clock and negative level reset.
+Creating register for signal `\lfm_chirp_controller.\frequency_word' using process `\lfm_chirp_controller.$proc$rtl/lfm_chirp_controller.sv:15$1'.
+  created $adff cell `$procdff$59' with positive edge clock and negative level reset.
+Creating register for signal `\lfm_chirp_controller.\active' using process `\lfm_chirp_controller.$proc$rtl/lfm_chirp_controller.sv:15$1'.
+  created $adff cell `$procdff$60' with positive edge clock and negative level reset.
+Creating register for signal `\lfm_chirp_controller.\done' using process `\lfm_chirp_controller.$proc$rtl/lfm_chirp_controller.sv:15$1'.
+  created $adff cell `$procdff$61' with positive edge clock and negative level reset.
+Creating register for signal `\lfm_chirp_controller.\samples_remaining' using process `\lfm_chirp_controller.$proc$rtl/lfm_chirp_controller.sv:15$1'.
+  created $adff cell `$procdff$62' with positive edge clock and negative level reset.
+
+5.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+5.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 2 empty switches in `\lfm_wavecore_quarter.$proc$rtl/lfm_wavecore_quarter.sv:37$17'.
+Removing empty process `lfm_wavecore_quarter.$proc$rtl/lfm_wavecore_quarter.sv:37$17'.
+Found and cleaned up 3 empty switches in `\lfm_chirp_controller.$proc$rtl/lfm_chirp_controller.sv:15$1'.
+Removing empty process `lfm_chirp_controller.$proc$rtl/lfm_chirp_controller.sv:15$1'.
+Cleaned up 5 empty switches.
+
+5.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module lfm_wavecore_quarter.
+Optimizing module dds_sine_rom_quarter.
+Optimizing module lfm_chirp_controller.
+<suppressed ~1 debug messages>
+
+5.3. Executing FLATTEN pass (flatten design).
+Deleting now unused module dds_sine_rom_quarter.
+Deleting now unused module lfm_chirp_controller.
+<suppressed ~2 debug messages>
+
+5.4. Executing OPT_EXPR pass (perform const folding).
+Optimizing module lfm_wavecore_quarter.
+
+5.5. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \lfm_wavecore_quarter..
+Removed 2 unused cells and 24 unused wires.
+<suppressed ~3 debug messages>
+
+5.6. Executing CHECK pass (checking for obvious problems).
+Checking module lfm_wavecore_quarter...
+Found and reported 0 problems.
+
+5.7. Executing OPT pass (performing simple optimizations).
+
+5.7.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module lfm_wavecore_quarter.
+
+5.7.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\lfm_wavecore_quarter'.
+<suppressed ~3 debug messages>
+Removed a total of 1 cells.
+
+5.7.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \lfm_wavecore_quarter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~7 debug messages>
+
+5.7.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \lfm_wavecore_quarter.
+Performed a total of 0 changes.
+
+5.7.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\lfm_wavecore_quarter'.
+Removed a total of 0 cells.
+
+5.7.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.7.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \lfm_wavecore_quarter..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+5.7.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module lfm_wavecore_quarter.
+
+5.7.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.7.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \lfm_wavecore_quarter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~7 debug messages>
+
+5.7.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \lfm_wavecore_quarter.
+Performed a total of 0 changes.
+
+5.7.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\lfm_wavecore_quarter'.
+Removed a total of 0 cells.
+
+5.7.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.7.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \lfm_wavecore_quarter..
+
+5.7.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module lfm_wavecore_quarter.
+
+5.7.16. Finished OPT passes. (There is nothing left to do.)
+
+5.8. Executing FSM pass (extract and optimize FSM).
+
+5.8.1. Executing FSM_DETECT pass (finding FSMs in design).
+
+5.8.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+5.8.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+5.8.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \lfm_wavecore_quarter..
+
+5.8.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+5.8.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+5.8.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+5.8.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+5.9. Executing OPT pass (performing simple optimizations).
+
+5.9.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module lfm_wavecore_quarter.
+
+5.9.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\lfm_wavecore_quarter'.
+Removed a total of 0 cells.
+
+5.9.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \lfm_wavecore_quarter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~7 debug messages>
+
+5.9.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \lfm_wavecore_quarter.
+Performed a total of 0 changes.
+
+5.9.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\lfm_wavecore_quarter'.
+Removed a total of 0 cells.
+
+5.9.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $procdff$58 ($adff) from module lfm_wavecore_quarter (D = $0\phase_accumulator[31:0], Q = \phase_accumulator).
+Adding EN signal on $flatten\chirp.$procdff$62 ($adff) from module lfm_wavecore_quarter (D = $flatten\chirp.$0\samples_remaining[15:0], Q = \chirp.samples_remaining).
+Adding EN signal on $flatten\chirp.$procdff$60 ($adff) from module lfm_wavecore_quarter (D = $flatten\chirp.$0\active[0:0], Q = \chirp.active).
+Adding EN signal on $flatten\chirp.$procdff$59 ($adff) from module lfm_wavecore_quarter (D = $flatten\chirp.$0\frequency_word[31:0], Q = \chirp.frequency_word).
+
+5.9.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \lfm_wavecore_quarter..
+
+5.9.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module lfm_wavecore_quarter.
+<suppressed ~4 debug messages>
+
+5.9.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.9.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \lfm_wavecore_quarter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~7 debug messages>
+
+5.9.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \lfm_wavecore_quarter.
+Performed a total of 0 changes.
+
+5.9.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\lfm_wavecore_quarter'.
+<suppressed ~9 debug messages>
+Removed a total of 3 cells.
+
+5.9.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.9.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \lfm_wavecore_quarter..
+Removed 0 unused cells and 3 unused wires.
+<suppressed ~1 debug messages>
+
+5.9.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module lfm_wavecore_quarter.
+
+5.9.16. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.9.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \lfm_wavecore_quarter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~7 debug messages>
+
+5.9.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \lfm_wavecore_quarter.
+Performed a total of 0 changes.
+
+5.9.19. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\lfm_wavecore_quarter'.
+Removed a total of 0 cells.
+
+5.9.20. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.9.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \lfm_wavecore_quarter..
+
+5.9.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module lfm_wavecore_quarter.
+
+5.9.23. Finished OPT passes. (There is nothing left to do.)
+
+5.10. Executing WREDUCE pass (reducing word size of cells).
+Removed top 25 address bits (of 32) from memory init port lfm_wavecore_quarter.$flatten\sine_rom.$meminit$\quarter_rom$rtl/dds_sine_rom_quarter.sv:0$15 (sine_rom.quarter_rom).
+Removed top 15 bits (of 16) from port B of cell lfm_wavecore_quarter.$flatten\chirp.$sub$rtl/lfm_chirp_controller.sv:34$6 ($sub).
+Removed top 15 bits (of 16) from port B of cell lfm_wavecore_quarter.$flatten\chirp.$eq$rtl/lfm_chirp_controller.sv:29$5 ($eq).
+Removed top 1 bits (of 7) from port B of cell lfm_wavecore_quarter.$flatten\sine_rom.$sub$rtl/dds_sine_rom_quarter.sv:19$8 ($sub).
+
+5.11. Executing PEEPOPT pass (run peephole optimizers).
+
+5.12. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \lfm_wavecore_quarter..
+
+5.13. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module lfm_wavecore_quarter:
+  creating $macc model for $add$rtl/lfm_wavecore_quarter.sv:43$20 ($add).
+  creating $macc model for $flatten\chirp.$add$rtl/lfm_chirp_controller.sv:35$7 ($add).
+  creating $macc model for $flatten\chirp.$sub$rtl/lfm_chirp_controller.sv:34$6 ($sub).
+  creating $macc model for $flatten\sine_rom.$sub$rtl/dds_sine_rom_quarter.sv:19$8 ($sub).
+  creating $macc model for $flatten\sine_rom.$sub$rtl/dds_sine_rom_quarter.sv:30$12 ($sub).
+  creating $alu model for $macc $flatten\sine_rom.$sub$rtl/dds_sine_rom_quarter.sv:30$12.
+  creating $alu model for $macc $flatten\sine_rom.$sub$rtl/dds_sine_rom_quarter.sv:19$8.
+  creating $alu model for $macc $flatten\chirp.$sub$rtl/lfm_chirp_controller.sv:34$6.
+  creating $alu model for $macc $flatten\chirp.$add$rtl/lfm_chirp_controller.sv:35$7.
+  creating $alu model for $macc $add$rtl/lfm_wavecore_quarter.sv:43$20.
+  creating $alu cell for $add$rtl/lfm_wavecore_quarter.sv:43$20: $auto$alumacc.cc:485:replace_alu$83
+  creating $alu cell for $flatten\chirp.$add$rtl/lfm_chirp_controller.sv:35$7: $auto$alumacc.cc:485:replace_alu$86
+  creating $alu cell for $flatten\chirp.$sub$rtl/lfm_chirp_controller.sv:34$6: $auto$alumacc.cc:485:replace_alu$89
+  creating $alu cell for $flatten\sine_rom.$sub$rtl/dds_sine_rom_quarter.sv:19$8: $auto$alumacc.cc:485:replace_alu$92
+  creating $alu cell for $flatten\sine_rom.$sub$rtl/dds_sine_rom_quarter.sv:30$12: $auto$alumacc.cc:485:replace_alu$95
+  created 5 $alu and 0 $macc cells.
+
+5.14. Executing SHARE pass (SAT-based resource sharing).
+
+5.15. Executing OPT pass (performing simple optimizations).
+
+5.15.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module lfm_wavecore_quarter.
+
+5.15.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\lfm_wavecore_quarter'.
+Removed a total of 0 cells.
+
+5.15.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \lfm_wavecore_quarter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~7 debug messages>
+
+5.15.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \lfm_wavecore_quarter.
+Performed a total of 0 changes.
+
+5.15.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\lfm_wavecore_quarter'.
+Removed a total of 0 cells.
+
+5.15.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.15.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \lfm_wavecore_quarter..
+
+5.15.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module lfm_wavecore_quarter.
+
+5.15.9. Finished OPT passes. (There is nothing left to do.)
+
+5.16. Executing MEMORY pass.
+
+5.16.1. Executing OPT_MEM pass (optimize memories).
+lfm_wavecore_quarter.sine_rom.quarter_rom: removing const-1 lane 11
+Performed a total of 1 transformations.
+
+5.16.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+5.16.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+5.16.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+5.16.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+Checking read port `\sine_rom.quarter_rom'[0] in module `\lfm_wavecore_quarter': no output FF found.
+Checking read port address `\sine_rom.quarter_rom'[0] in module `\lfm_wavecore_quarter': no address FF found.
+
+5.16.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \lfm_wavecore_quarter..
+
+5.16.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+5.16.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+5.16.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \lfm_wavecore_quarter..
+
+5.16.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+5.17. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \lfm_wavecore_quarter..
+
+5.18. Executing OPT pass (performing simple optimizations).
+
+5.18.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module lfm_wavecore_quarter.
+<suppressed ~13 debug messages>
+
+5.18.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\lfm_wavecore_quarter'.
+Removed a total of 0 cells.
+
+5.18.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.18.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \lfm_wavecore_quarter..
+Removed 0 unused cells and 12 unused wires.
+<suppressed ~1 debug messages>
+
+5.18.5. Finished fast OPT passes.
+
+5.19. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+Mapping memory \sine_rom.quarter_rom in module \lfm_wavecore_quarter:
+  created 65 $dff cells and 0 static cells of width 11.
+  read interface: 0 $dff and 127 $mux cells.
+  write interface: 0 write mux blocks.
+
+5.20. Executing OPT pass (performing simple optimizations).
+
+5.20.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module lfm_wavecore_quarter.
+<suppressed ~121 debug messages>
+
+5.20.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\lfm_wavecore_quarter'.
+Removed a total of 0 cells.
+
+5.20.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \lfm_wavecore_quarter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~7 debug messages>
+
+5.20.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \lfm_wavecore_quarter.
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][6][5]$330:
+      Old ports: A=11'00111110001, B=11'01000100010, Y=$memory\sine_rom.quarter_rom$rdmux[0][5][2]$b$227
+      New ports: A=2'01, B=2'10, Y=$memory\sine_rom.quarter_rom$rdmux[0][5][2]$b$227 [1:0]
+      New connections: $memory\sine_rom.quarter_rom$rdmux[0][5][2]$b$227 [10:2] = { 1'0 $memory\sine_rom.quarter_rom$rdmux[0][5][2]$b$227 [1:0] $memory\sine_rom.quarter_rom$rdmux[0][5][2]$b$227 [0] $memory\sine_rom.quarter_rom$rdmux[0][5][2]$b$227 [0] 1'1 $memory\sine_rom.quarter_rom$rdmux[0][5][2]$b$227 [0] 2'00 }
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][6][4]$327:
+      Old ports: A=11'00110001111, B=11'00111000000, Y=$memory\sine_rom.quarter_rom$rdmux[0][5][2]$a$226
+      New ports: A=2'01, B=2'10, Y={ $memory\sine_rom.quarter_rom$rdmux[0][5][2]$a$226 [6] $memory\sine_rom.quarter_rom$rdmux[0][5][2]$a$226 [0] }
+      New connections: { $memory\sine_rom.quarter_rom$rdmux[0][5][2]$a$226 [10:7] $memory\sine_rom.quarter_rom$rdmux[0][5][2]$a$226 [5:1] } = { 6'001100 $memory\sine_rom.quarter_rom$rdmux[0][5][2]$a$226 [0] $memory\sine_rom.quarter_rom$rdmux[0][5][2]$a$226 [0] $memory\sine_rom.quarter_rom$rdmux[0][5][2]$a$226 [0] }
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][6][3]$324:
+      Old ports: A=11'00100101100, B=11'00101011110, Y=$memory\sine_rom.quarter_rom$rdmux[0][5][1]$b$224
+      New ports: A=2'10, B=2'01, Y={ $memory\sine_rom.quarter_rom$rdmux[0][5][1]$b$224 [5] $memory\sine_rom.quarter_rom$rdmux[0][5][1]$b$224 [1] }
+      New connections: { $memory\sine_rom.quarter_rom$rdmux[0][5][1]$b$224 [10:6] $memory\sine_rom.quarter_rom$rdmux[0][5][1]$b$224 [4:2] $memory\sine_rom.quarter_rom$rdmux[0][5][1]$b$224 [0] } = { 4'0010 $memory\sine_rom.quarter_rom$rdmux[0][5][1]$b$224 [1] $memory\sine_rom.quarter_rom$rdmux[0][5][1]$b$224 [1] 3'110 }
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][6][2]$321:
+      Old ports: A=11'00011001000, B=11'00011111010, Y=$memory\sine_rom.quarter_rom$rdmux[0][5][1]$a$223
+      New ports: A=1'0, B=1'1, Y=$memory\sine_rom.quarter_rom$rdmux[0][5][1]$a$223 [1]
+      New connections: { $memory\sine_rom.quarter_rom$rdmux[0][5][1]$a$223 [10:2] $memory\sine_rom.quarter_rom$rdmux[0][5][1]$a$223 [0] } = { 5'00011 $memory\sine_rom.quarter_rom$rdmux[0][5][1]$a$223 [1] $memory\sine_rom.quarter_rom$rdmux[0][5][1]$a$223 [1] 3'100 }
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][6][1]$318:
+      Old ports: A=11'00001100100, B=11'00010010110, Y=$memory\sine_rom.quarter_rom$rdmux[0][5][0]$b$221
+      New ports: A=2'10, B=2'01, Y={ $memory\sine_rom.quarter_rom$rdmux[0][5][0]$b$221 [5] $memory\sine_rom.quarter_rom$rdmux[0][5][0]$b$221 [1] }
+      New connections: { $memory\sine_rom.quarter_rom$rdmux[0][5][0]$b$221 [10:6] $memory\sine_rom.quarter_rom$rdmux[0][5][0]$b$221 [4:2] $memory\sine_rom.quarter_rom$rdmux[0][5][0]$b$221 [0] } = { 3'000 $memory\sine_rom.quarter_rom$rdmux[0][5][0]$b$221 [1] $memory\sine_rom.quarter_rom$rdmux[0][5][0]$b$221 [5] $memory\sine_rom.quarter_rom$rdmux[0][5][0]$b$221 [1] 3'010 }
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][6][0]$315:
+      Old ports: A=11'00000000000, B=11'00000110010, Y=$memory\sine_rom.quarter_rom$rdmux[0][5][0]$a$220
+      New ports: A=1'0, B=1'1, Y=$memory\sine_rom.quarter_rom$rdmux[0][5][0]$a$220 [1]
+      New connections: { $memory\sine_rom.quarter_rom$rdmux[0][5][0]$a$220 [10:2] $memory\sine_rom.quarter_rom$rdmux[0][5][0]$a$220 [0] } = { 5'00000 $memory\sine_rom.quarter_rom$rdmux[0][5][0]$a$220 [1] $memory\sine_rom.quarter_rom$rdmux[0][5][0]$a$220 [1] 3'000 }
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][6][7]$336:
+      Old ports: A=11'01010110001, B=11'01011100000, Y=$memory\sine_rom.quarter_rom$rdmux[0][5][3]$b$230
+      New ports: A=2'01, B=2'10, Y={ $memory\sine_rom.quarter_rom$rdmux[0][5][3]$b$230 [6] $memory\sine_rom.quarter_rom$rdmux[0][5][3]$b$230 [0] }
+      New connections: { $memory\sine_rom.quarter_rom$rdmux[0][5][3]$b$230 [10:7] $memory\sine_rom.quarter_rom$rdmux[0][5][3]$b$230 [5:1] } = { 5'01011 $memory\sine_rom.quarter_rom$rdmux[0][5][3]$b$230 [0] 3'000 }
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][6][13]$354:
+      Old ports: A=11'10011000011, B=11'10011101011, Y=$memory\sine_rom.quarter_rom$rdmux[0][5][6]$b$239
+      New ports: A=1'0, B=1'1, Y=$memory\sine_rom.quarter_rom$rdmux[0][5][6]$b$239 [3]
+      New connections: { $memory\sine_rom.quarter_rom$rdmux[0][5][6]$b$239 [10:4] $memory\sine_rom.quarter_rom$rdmux[0][5][6]$b$239 [2:0] } = { 5'10011 $memory\sine_rom.quarter_rom$rdmux[0][5][6]$b$239 [3] 4'0011 }
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][6][21]$378:
+      Old ports: A=11'11011011100, B=11'11011110101, Y=$memory\sine_rom.quarter_rom$rdmux[0][5][10]$b$251
+      New ports: A=2'10, B=2'01, Y={ $memory\sine_rom.quarter_rom$rdmux[0][5][10]$b$251 [3] $memory\sine_rom.quarter_rom$rdmux[0][5][10]$b$251 [0] }
+      New connections: { $memory\sine_rom.quarter_rom$rdmux[0][5][10]$b$251 [10:4] $memory\sine_rom.quarter_rom$rdmux[0][5][10]$b$251 [2:1] } = { 5'11011 $memory\sine_rom.quarter_rom$rdmux[0][5][10]$b$251 [0] 3'110 }
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][6][30]$405:
+      Old ports: A=11'11111110101, B=11'11111111001, Y=$memory\sine_rom.quarter_rom$rdmux[0][5][15]$a$265
+      New ports: A=2'01, B=2'10, Y=$memory\sine_rom.quarter_rom$rdmux[0][5][15]$a$265 [3:2]
+      New connections: { $memory\sine_rom.quarter_rom$rdmux[0][5][15]$a$265 [10:4] $memory\sine_rom.quarter_rom$rdmux[0][5][15]$a$265 [1:0] } = 9'111111101
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][6][28]$399:
+      Old ports: A=11'11111011000, B=11'11111100001, Y=$memory\sine_rom.quarter_rom$rdmux[0][5][14]$a$262
+      New ports: A=2'10, B=2'01, Y={ $memory\sine_rom.quarter_rom$rdmux[0][5][14]$a$262 [3] $memory\sine_rom.quarter_rom$rdmux[0][5][14]$a$262 [0] }
+      New connections: { $memory\sine_rom.quarter_rom$rdmux[0][5][14]$a$262 [10:4] $memory\sine_rom.quarter_rom$rdmux[0][5][14]$a$262 [2:1] } = { 5'11111 $memory\sine_rom.quarter_rom$rdmux[0][5][14]$a$262 [0] $memory\sine_rom.quarter_rom$rdmux[0][5][14]$a$262 [3] 2'00 }
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][6][24]$387:
+      Old ports: A=11'11101100011, B=11'11101110110, Y=$memory\sine_rom.quarter_rom$rdmux[0][5][12]$a$256
+      New ports: A=2'01, B=2'10, Y={ $memory\sine_rom.quarter_rom$rdmux[0][5][12]$a$256 [2] $memory\sine_rom.quarter_rom$rdmux[0][5][12]$a$256 [0] }
+      New connections: { $memory\sine_rom.quarter_rom$rdmux[0][5][12]$a$256 [10:3] $memory\sine_rom.quarter_rom$rdmux[0][5][12]$a$256 [1] } = { 6'111011 $memory\sine_rom.quarter_rom$rdmux[0][5][12]$a$256 [2] 2'01 }
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][6][15]$360:
+      Old ports: A=11'10101011111, B=11'10110000011, Y=$memory\sine_rom.quarter_rom$rdmux[0][5][7]$b$242
+      New ports: A=2'01, B=2'10, Y={ $memory\sine_rom.quarter_rom$rdmux[0][5][7]$b$242 [7] $memory\sine_rom.quarter_rom$rdmux[0][5][7]$b$242 [2] }
+      New connections: { $memory\sine_rom.quarter_rom$rdmux[0][5][7]$b$242 [10:8] $memory\sine_rom.quarter_rom$rdmux[0][5][7]$b$242 [6:3] $memory\sine_rom.quarter_rom$rdmux[0][5][7]$b$242 [1:0] } = { 3'101 $memory\sine_rom.quarter_rom$rdmux[0][5][7]$b$242 [2] 1'0 $memory\sine_rom.quarter_rom$rdmux[0][5][7]$b$242 [2] $memory\sine_rom.quarter_rom$rdmux[0][5][7]$b$242 [2] 2'11 }
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][6][12]$351:
+      Old ports: A=11'10001110001, B=11'10010011010, Y=$memory\sine_rom.quarter_rom$rdmux[0][5][6]$a$238
+      New ports: A=2'01, B=2'10, Y=$memory\sine_rom.quarter_rom$rdmux[0][5][6]$a$238 [1:0]
+      New connections: $memory\sine_rom.quarter_rom$rdmux[0][5][6]$a$238 [10:2] = { 3'100 $memory\sine_rom.quarter_rom$rdmux[0][5][6]$a$238 [1:0] $memory\sine_rom.quarter_rom$rdmux[0][5][6]$a$238 [0] 1'1 $memory\sine_rom.quarter_rom$rdmux[0][5][6]$a$238 [1] 1'0 }
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][6][26]$393:
+      Old ports: A=11'11110100111, B=11'11110110101, Y=$memory\sine_rom.quarter_rom$rdmux[0][5][13]$a$259
+      New ports: A=2'01, B=2'10, Y={ $memory\sine_rom.quarter_rom$rdmux[0][5][13]$a$259 [4] $memory\sine_rom.quarter_rom$rdmux[0][5][13]$a$259 [1] }
+      New connections: { $memory\sine_rom.quarter_rom$rdmux[0][5][13]$a$259 [10:5] $memory\sine_rom.quarter_rom$rdmux[0][5][13]$a$259 [3:2] $memory\sine_rom.quarter_rom$rdmux[0][5][13]$a$259 [0] } = 9'111101011
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][6][29]$402:
+      Old ports: A=11'11111101001, B=11'11111110000, Y=$memory\sine_rom.quarter_rom$rdmux[0][5][14]$b$263
+      New ports: A=2'01, B=2'10, Y={ $memory\sine_rom.quarter_rom$rdmux[0][5][14]$b$263 [4] $memory\sine_rom.quarter_rom$rdmux[0][5][14]$b$263 [0] }
+      New connections: { $memory\sine_rom.quarter_rom$rdmux[0][5][14]$b$263 [10:5] $memory\sine_rom.quarter_rom$rdmux[0][5][14]$b$263 [3:1] } = { 6'111111 $memory\sine_rom.quarter_rom$rdmux[0][5][14]$b$263 [0] 2'00 }
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][6][19]$372:
+      Old ports: A=11'11001101100, B=11'11010001010, Y=$memory\sine_rom.quarter_rom$rdmux[0][5][9]$b$248
+      New ports: A=2'10, B=2'01, Y=$memory\sine_rom.quarter_rom$rdmux[0][5][9]$b$248 [2:1]
+      New connections: { $memory\sine_rom.quarter_rom$rdmux[0][5][9]$b$248 [10:3] $memory\sine_rom.quarter_rom$rdmux[0][5][9]$b$248 [0] } = { 3'110 $memory\sine_rom.quarter_rom$rdmux[0][5][9]$b$248 [1] $memory\sine_rom.quarter_rom$rdmux[0][5][9]$b$248 [2] $memory\sine_rom.quarter_rom$rdmux[0][5][9]$b$248 [2] 3'010 }
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][6][22]$381:
+      Old ports: A=11'11100001101, B=11'11100100100, Y=$memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253
+      New ports: A=2'01, B=2'10, Y={ $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [5] $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [0] }
+      New connections: { $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [10:6] $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [4:1] } = { 6'111000 $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [0] 2'10 }
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][6][11]$348:
+      Old ports: A=11'10000011100, B=11'10001000111, Y=$memory\sine_rom.quarter_rom$rdmux[0][5][5]$b$236
+      New ports: A=2'10, B=2'01, Y={ $memory\sine_rom.quarter_rom$rdmux[0][5][5]$b$236 [3] $memory\sine_rom.quarter_rom$rdmux[0][5][5]$b$236 [0] }
+      New connections: { $memory\sine_rom.quarter_rom$rdmux[0][5][5]$b$236 [10:4] $memory\sine_rom.quarter_rom$rdmux[0][5][5]$b$236 [2:1] } = { 4'1000 $memory\sine_rom.quarter_rom$rdmux[0][5][5]$b$236 [0] 1'0 $memory\sine_rom.quarter_rom$rdmux[0][5][5]$b$236 [3] 1'1 $memory\sine_rom.quarter_rom$rdmux[0][5][5]$b$236 [0] }
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][6][14]$357:
+      Old ports: A=11'10100010010, B=11'10100111001, Y=$memory\sine_rom.quarter_rom$rdmux[0][5][7]$a$241
+      New ports: A=2'10, B=2'01, Y=$memory\sine_rom.quarter_rom$rdmux[0][5][7]$a$241 [1:0]
+      New connections: $memory\sine_rom.quarter_rom$rdmux[0][5][7]$a$241 [10:2] = { 5'10100 $memory\sine_rom.quarter_rom$rdmux[0][5][7]$a$241 [0] 1'1 $memory\sine_rom.quarter_rom$rdmux[0][5][7]$a$241 [0] 1'0 }
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][6][6]$333:
+      Old ports: A=11'01001010010, B=11'01010000010, Y=$memory\sine_rom.quarter_rom$rdmux[0][5][3]$a$229
+      New ports: A=2'01, B=2'10, Y={ $memory\sine_rom.quarter_rom$rdmux[0][5][3]$a$229 [7] $memory\sine_rom.quarter_rom$rdmux[0][5][3]$a$229 [4] }
+      New connections: { $memory\sine_rom.quarter_rom$rdmux[0][5][3]$a$229 [10:8] $memory\sine_rom.quarter_rom$rdmux[0][5][3]$a$229 [6:5] $memory\sine_rom.quarter_rom$rdmux[0][5][3]$a$229 [3:0] } = { 3'010 $memory\sine_rom.quarter_rom$rdmux[0][5][3]$a$229 [4] 5'00010 }
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][6][8]$339:
+      Old ports: A=11'01100001111, B=11'01100111101, Y=$memory\sine_rom.quarter_rom$rdmux[0][5][4]$a$232
+      New ports: A=2'01, B=2'10, Y={ $memory\sine_rom.quarter_rom$rdmux[0][5][4]$a$232 [4] $memory\sine_rom.quarter_rom$rdmux[0][5][4]$a$232 [1] }
+      New connections: { $memory\sine_rom.quarter_rom$rdmux[0][5][4]$a$232 [10:5] $memory\sine_rom.quarter_rom$rdmux[0][5][4]$a$232 [3:2] $memory\sine_rom.quarter_rom$rdmux[0][5][4]$a$232 [0] } = { 5'01100 $memory\sine_rom.quarter_rom$rdmux[0][5][4]$a$232 [4] 3'111 }
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][6][23]$384:
+      Old ports: A=11'11100111010, B=11'11101001111, Y=$memory\sine_rom.quarter_rom$rdmux[0][5][11]$b$254
+      New ports: A=2'10, B=2'01, Y={ $memory\sine_rom.quarter_rom$rdmux[0][5][11]$b$254 [4] $memory\sine_rom.quarter_rom$rdmux[0][5][11]$b$254 [0] }
+      New connections: { $memory\sine_rom.quarter_rom$rdmux[0][5][11]$b$254 [10:5] $memory\sine_rom.quarter_rom$rdmux[0][5][11]$b$254 [3:1] } = { 4'1110 $memory\sine_rom.quarter_rom$rdmux[0][5][11]$b$254 [0] $memory\sine_rom.quarter_rom$rdmux[0][5][11]$b$254 [4] 1'1 $memory\sine_rom.quarter_rom$rdmux[0][5][11]$b$254 [0] 1'1 }
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][6][27]$396:
+      Old ports: A=11'11111000010, B=11'11111001101, Y=$memory\sine_rom.quarter_rom$rdmux[0][5][13]$b$260
+      New ports: A=2'10, B=2'01, Y=$memory\sine_rom.quarter_rom$rdmux[0][5][13]$b$260 [1:0]
+      New connections: $memory\sine_rom.quarter_rom$rdmux[0][5][13]$b$260 [10:2] = { 7'1111100 $memory\sine_rom.quarter_rom$rdmux[0][5][13]$b$260 [0] $memory\sine_rom.quarter_rom$rdmux[0][5][13]$b$260 [0] }
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][6][20]$375:
+      Old ports: A=11'11010100110, B=11'11011000001, Y=$memory\sine_rom.quarter_rom$rdmux[0][5][10]$a$250
+      New ports: A=2'10, B=2'01, Y=$memory\sine_rom.quarter_rom$rdmux[0][5][10]$a$250 [1:0]
+      New connections: $memory\sine_rom.quarter_rom$rdmux[0][5][10]$a$250 [10:2] = { 4'1101 $memory\sine_rom.quarter_rom$rdmux[0][5][10]$a$250 [0] $memory\sine_rom.quarter_rom$rdmux[0][5][10]$a$250 [1] 2'00 $memory\sine_rom.quarter_rom$rdmux[0][5][10]$a$250 [1] }
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][6][25]$390:
+      Old ports: A=11'11110000111, B=11'11110011000, Y=$memory\sine_rom.quarter_rom$rdmux[0][5][12]$b$257
+      New ports: A=2'01, B=2'10, Y={ $memory\sine_rom.quarter_rom$rdmux[0][5][12]$b$257 [3] $memory\sine_rom.quarter_rom$rdmux[0][5][12]$b$257 [0] }
+      New connections: { $memory\sine_rom.quarter_rom$rdmux[0][5][12]$b$257 [10:4] $memory\sine_rom.quarter_rom$rdmux[0][5][12]$b$257 [2:1] } = { 6'111100 $memory\sine_rom.quarter_rom$rdmux[0][5][12]$b$257 [3] $memory\sine_rom.quarter_rom$rdmux[0][5][12]$b$257 [0] $memory\sine_rom.quarter_rom$rdmux[0][5][12]$b$257 [0] }
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][6][18]$369:
+      Old ports: A=11'11000101110, B=11'11001001110, Y=$memory\sine_rom.quarter_rom$rdmux[0][5][9]$a$247
+      New ports: A=2'01, B=2'10, Y=$memory\sine_rom.quarter_rom$rdmux[0][5][9]$a$247 [6:5]
+      New connections: { $memory\sine_rom.quarter_rom$rdmux[0][5][9]$a$247 [10:7] $memory\sine_rom.quarter_rom$rdmux[0][5][9]$a$247 [4:0] } = 9'110001110
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][6][10]$345:
+      Old ports: A=11'01111000101, B=11'01111110001, Y=$memory\sine_rom.quarter_rom$rdmux[0][5][5]$a$235
+      New ports: A=2'01, B=2'10, Y={ $memory\sine_rom.quarter_rom$rdmux[0][5][5]$a$235 [4] $memory\sine_rom.quarter_rom$rdmux[0][5][5]$a$235 [2] }
+      New connections: { $memory\sine_rom.quarter_rom$rdmux[0][5][5]$a$235 [10:5] $memory\sine_rom.quarter_rom$rdmux[0][5][5]$a$235 [3] $memory\sine_rom.quarter_rom$rdmux[0][5][5]$a$235 [1:0] } = { 5'01111 $memory\sine_rom.quarter_rom$rdmux[0][5][5]$a$235 [4] 3'001 }
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][6][9]$342:
+      Old ports: A=11'01101101011, B=11'01110011000, Y=$memory\sine_rom.quarter_rom$rdmux[0][5][4]$b$233
+      New ports: A=2'01, B=2'10, Y={ $memory\sine_rom.quarter_rom$rdmux[0][5][4]$b$233 [4] $memory\sine_rom.quarter_rom$rdmux[0][5][4]$b$233 [0] }
+      New connections: { $memory\sine_rom.quarter_rom$rdmux[0][5][4]$b$233 [10:5] $memory\sine_rom.quarter_rom$rdmux[0][5][4]$b$233 [3:1] } = { 3'011 $memory\sine_rom.quarter_rom$rdmux[0][5][4]$b$233 [4] $memory\sine_rom.quarter_rom$rdmux[0][5][4]$b$233 [0] $memory\sine_rom.quarter_rom$rdmux[0][5][4]$b$233 [0] 2'10 $memory\sine_rom.quarter_rom$rdmux[0][5][4]$b$233 [0] }
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][6][31]$408:
+      Old ports: A=11'11111111101, B=11'11111111110, Y=$memory\sine_rom.quarter_rom$rdmux[0][5][15]$b$266
+      New ports: A=2'01, B=2'10, Y=$memory\sine_rom.quarter_rom$rdmux[0][5][15]$b$266 [1:0]
+      New connections: $memory\sine_rom.quarter_rom$rdmux[0][5][15]$b$266 [10:2] = 9'111111111
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][6][17]$366:
+      Old ports: A=11'10111101101, B=11'11000001110, Y=$memory\sine_rom.quarter_rom$rdmux[0][5][8]$b$245
+      New ports: A=2'01, B=2'10, Y=$memory\sine_rom.quarter_rom$rdmux[0][5][8]$b$245 [1:0]
+      New connections: $memory\sine_rom.quarter_rom$rdmux[0][5][8]$b$245 [10:2] = { 1'1 $memory\sine_rom.quarter_rom$rdmux[0][5][8]$b$245 [1:0] $memory\sine_rom.quarter_rom$rdmux[0][5][8]$b$245 [0] $memory\sine_rom.quarter_rom$rdmux[0][5][8]$b$245 [0] $memory\sine_rom.quarter_rom$rdmux[0][5][8]$b$245 [0] 3'011 }
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][6][32]$411:
+      Old ports: A=11'11111111111, B=11'x, Y=$memory\sine_rom.quarter_rom$rdmux[0][5][16]$a$268
+      New ports: A=1'1, B=1'x, Y=$memory\sine_rom.quarter_rom$rdmux[0][5][16]$a$268 [0]
+      New connections: $memory\sine_rom.quarter_rom$rdmux[0][5][16]$a$268 [10:1] = { $memory\sine_rom.quarter_rom$rdmux[0][5][16]$a$268 [0] $memory\sine_rom.quarter_rom$rdmux[0][5][16]$a$268 [0] $memory\sine_rom.quarter_rom$rdmux[0][5][16]$a$268 [0] $memory\sine_rom.quarter_rom$rdmux[0][5][16]$a$268 [0] $memory\sine_rom.quarter_rom$rdmux[0][5][16]$a$268 [0] $memory\sine_rom.quarter_rom$rdmux[0][5][16]$a$268 [0] $memory\sine_rom.quarter_rom$rdmux[0][5][16]$a$268 [0] $memory\sine_rom.quarter_rom$rdmux[0][5][16]$a$268 [0] $memory\sine_rom.quarter_rom$rdmux[0][5][16]$a$268 [0] $memory\sine_rom.quarter_rom$rdmux[0][5][16]$a$268 [0] }
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][6][16]$363:
+      Old ports: A=11'10110100111, B=11'10111001010, Y=$memory\sine_rom.quarter_rom$rdmux[0][5][8]$a$244
+      New ports: A=2'01, B=2'10, Y={ $memory\sine_rom.quarter_rom$rdmux[0][5][8]$a$244 [3] $memory\sine_rom.quarter_rom$rdmux[0][5][8]$a$244 [0] }
+      New connections: { $memory\sine_rom.quarter_rom$rdmux[0][5][8]$a$244 [10:4] $memory\sine_rom.quarter_rom$rdmux[0][5][8]$a$244 [2:1] } = { 4'1011 $memory\sine_rom.quarter_rom$rdmux[0][5][8]$a$244 [3] $memory\sine_rom.quarter_rom$rdmux[0][5][8]$a$244 [0] 1'0 $memory\sine_rom.quarter_rom$rdmux[0][5][8]$a$244 [0] 1'1 }
+  Optimizing cells in module \lfm_wavecore_quarter.
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][5][16]$267:
+      Old ports: A=$memory\sine_rom.quarter_rom$rdmux[0][5][16]$a$268, B=11'x, Y=$memory\sine_rom.quarter_rom$rdmux[0][4][8]$a$196
+      New ports: A=$memory\sine_rom.quarter_rom$rdmux[0][5][16]$a$268 [0], B=1'x, Y=$memory\sine_rom.quarter_rom$rdmux[0][4][8]$a$196 [0]
+      New connections: $memory\sine_rom.quarter_rom$rdmux[0][4][8]$a$196 [10:1] = { $memory\sine_rom.quarter_rom$rdmux[0][4][8]$a$196 [0] $memory\sine_rom.quarter_rom$rdmux[0][4][8]$a$196 [0] $memory\sine_rom.quarter_rom$rdmux[0][4][8]$a$196 [0] $memory\sine_rom.quarter_rom$rdmux[0][4][8]$a$196 [0] $memory\sine_rom.quarter_rom$rdmux[0][4][8]$a$196 [0] $memory\sine_rom.quarter_rom$rdmux[0][4][8]$a$196 [0] $memory\sine_rom.quarter_rom$rdmux[0][4][8]$a$196 [0] $memory\sine_rom.quarter_rom$rdmux[0][4][8]$a$196 [0] $memory\sine_rom.quarter_rom$rdmux[0][4][8]$a$196 [0] $memory\sine_rom.quarter_rom$rdmux[0][4][8]$a$196 [0] }
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][5][15]$264:
+      Old ports: A=$memory\sine_rom.quarter_rom$rdmux[0][5][15]$a$265, B=$memory\sine_rom.quarter_rom$rdmux[0][5][15]$b$266, Y=$memory\sine_rom.quarter_rom$rdmux[0][4][7]$b$194
+      New ports: A={ $memory\sine_rom.quarter_rom$rdmux[0][5][15]$a$265 [3:2] 2'01 }, B={ 2'11 $memory\sine_rom.quarter_rom$rdmux[0][5][15]$b$266 [1:0] }, Y=$memory\sine_rom.quarter_rom$rdmux[0][4][7]$b$194 [3:0]
+      New connections: $memory\sine_rom.quarter_rom$rdmux[0][4][7]$b$194 [10:4] = 7'1111111
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][5][14]$261:
+      Old ports: A=$memory\sine_rom.quarter_rom$rdmux[0][5][14]$a$262, B=$memory\sine_rom.quarter_rom$rdmux[0][5][14]$b$263, Y=$memory\sine_rom.quarter_rom$rdmux[0][4][7]$a$193
+      New ports: A={ $memory\sine_rom.quarter_rom$rdmux[0][5][14]$a$262 [0] $memory\sine_rom.quarter_rom$rdmux[0][5][14]$a$262 [3] $memory\sine_rom.quarter_rom$rdmux[0][5][14]$a$262 [3] $memory\sine_rom.quarter_rom$rdmux[0][5][14]$a$262 [0] }, B={ 1'1 $memory\sine_rom.quarter_rom$rdmux[0][5][14]$b$263 [4] $memory\sine_rom.quarter_rom$rdmux[0][5][14]$b$263 [0] $memory\sine_rom.quarter_rom$rdmux[0][5][14]$b$263 [0] }, Y={ $memory\sine_rom.quarter_rom$rdmux[0][4][7]$a$193 [5:3] $memory\sine_rom.quarter_rom$rdmux[0][4][7]$a$193 [0] }
+      New connections: { $memory\sine_rom.quarter_rom$rdmux[0][4][7]$a$193 [10:6] $memory\sine_rom.quarter_rom$rdmux[0][4][7]$a$193 [2:1] } = 7'1111100
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][5][13]$258:
+      Old ports: A=$memory\sine_rom.quarter_rom$rdmux[0][5][13]$a$259, B=$memory\sine_rom.quarter_rom$rdmux[0][5][13]$b$260, Y=$memory\sine_rom.quarter_rom$rdmux[0][4][6]$b$191
+      New ports: A={ 2'01 $memory\sine_rom.quarter_rom$rdmux[0][5][13]$a$259 [4] 1'0 $memory\sine_rom.quarter_rom$rdmux[0][5][13]$a$259 [1] 1'1 }, B={ 3'100 $memory\sine_rom.quarter_rom$rdmux[0][5][13]$b$260 [0] $memory\sine_rom.quarter_rom$rdmux[0][5][13]$b$260 [1:0] }, Y={ $memory\sine_rom.quarter_rom$rdmux[0][4][6]$b$191 [6:3] $memory\sine_rom.quarter_rom$rdmux[0][4][6]$b$191 [1:0] }
+      New connections: { $memory\sine_rom.quarter_rom$rdmux[0][4][6]$b$191 [10:7] $memory\sine_rom.quarter_rom$rdmux[0][4][6]$b$191 [2] } = { 4'1111 $memory\sine_rom.quarter_rom$rdmux[0][4][6]$b$191 [0] }
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][5][12]$255:
+      Old ports: A=$memory\sine_rom.quarter_rom$rdmux[0][5][12]$a$256, B=$memory\sine_rom.quarter_rom$rdmux[0][5][12]$b$257, Y=$memory\sine_rom.quarter_rom$rdmux[0][4][6]$a$190
+      New ports: A={ 2'01 $memory\sine_rom.quarter_rom$rdmux[0][5][12]$a$256 [2] 1'0 $memory\sine_rom.quarter_rom$rdmux[0][5][12]$a$256 [2] 1'1 $memory\sine_rom.quarter_rom$rdmux[0][5][12]$a$256 [0] }, B={ 2'10 $memory\sine_rom.quarter_rom$rdmux[0][5][12]$b$257 [3] $memory\sine_rom.quarter_rom$rdmux[0][5][12]$b$257 [3] $memory\sine_rom.quarter_rom$rdmux[0][5][12]$b$257 [0] $memory\sine_rom.quarter_rom$rdmux[0][5][12]$b$257 [0] $memory\sine_rom.quarter_rom$rdmux[0][5][12]$b$257 [0] }, Y={ $memory\sine_rom.quarter_rom$rdmux[0][4][6]$a$190 [7] $memory\sine_rom.quarter_rom$rdmux[0][4][6]$a$190 [5:0] }
+      New connections: { $memory\sine_rom.quarter_rom$rdmux[0][4][6]$a$190 [10:8] $memory\sine_rom.quarter_rom$rdmux[0][4][6]$a$190 [6] } = { 3'111 $memory\sine_rom.quarter_rom$rdmux[0][4][6]$a$190 [5] }
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][5][11]$252:
+      Old ports: A=$memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253, B=$memory\sine_rom.quarter_rom$rdmux[0][5][11]$b$254, Y=$memory\sine_rom.quarter_rom$rdmux[0][4][5]$b$188
+      New ports: A={ 1'0 $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [5] 1'0 $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [0] 2'10 $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [0] }, B={ $memory\sine_rom.quarter_rom$rdmux[0][5][11]$b$254 [0] $memory\sine_rom.quarter_rom$rdmux[0][5][11]$b$254 [4] $memory\sine_rom.quarter_rom$rdmux[0][5][11]$b$254 [4] 1'1 $memory\sine_rom.quarter_rom$rdmux[0][5][11]$b$254 [0] 1'1 $memory\sine_rom.quarter_rom$rdmux[0][5][11]$b$254 [0] }, Y=$memory\sine_rom.quarter_rom$rdmux[0][4][5]$b$188 [6:0]
+      New connections: $memory\sine_rom.quarter_rom$rdmux[0][4][5]$b$188 [10:7] = 4'1110
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][5][10]$249:
+      Old ports: A=$memory\sine_rom.quarter_rom$rdmux[0][5][10]$a$250, B=$memory\sine_rom.quarter_rom$rdmux[0][5][10]$b$251, Y=$memory\sine_rom.quarter_rom$rdmux[0][4][5]$a$187
+      New ports: A={ $memory\sine_rom.quarter_rom$rdmux[0][5][10]$a$250 [0] $memory\sine_rom.quarter_rom$rdmux[0][5][10]$a$250 [1] 2'00 $memory\sine_rom.quarter_rom$rdmux[0][5][10]$a$250 [1] $memory\sine_rom.quarter_rom$rdmux[0][5][10]$a$250 [1:0] }, B={ 1'1 $memory\sine_rom.quarter_rom$rdmux[0][5][10]$b$251 [0] 1'1 $memory\sine_rom.quarter_rom$rdmux[0][5][10]$b$251 [3] 2'10 $memory\sine_rom.quarter_rom$rdmux[0][5][10]$b$251 [0] }, Y=$memory\sine_rom.quarter_rom$rdmux[0][4][5]$a$187 [6:0]
+      New connections: $memory\sine_rom.quarter_rom$rdmux[0][4][5]$a$187 [10:7] = 4'1101
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][5][9]$246:
+      Old ports: A=$memory\sine_rom.quarter_rom$rdmux[0][5][9]$a$247, B=$memory\sine_rom.quarter_rom$rdmux[0][5][9]$b$248, Y=$memory\sine_rom.quarter_rom$rdmux[0][4][4]$b$185
+      New ports: A={ 1'0 $memory\sine_rom.quarter_rom$rdmux[0][5][9]$a$247 [6:5] 2'11 }, B={ $memory\sine_rom.quarter_rom$rdmux[0][5][9]$b$248 [1] $memory\sine_rom.quarter_rom$rdmux[0][5][9]$b$248 [2] $memory\sine_rom.quarter_rom$rdmux[0][5][9]$b$248 [2] $memory\sine_rom.quarter_rom$rdmux[0][5][9]$b$248 [2:1] }, Y={ $memory\sine_rom.quarter_rom$rdmux[0][4][4]$b$185 [7:5] $memory\sine_rom.quarter_rom$rdmux[0][4][4]$b$185 [2:1] }
+      New connections: { $memory\sine_rom.quarter_rom$rdmux[0][4][4]$b$185 [10:8] $memory\sine_rom.quarter_rom$rdmux[0][4][4]$b$185 [4:3] $memory\sine_rom.quarter_rom$rdmux[0][4][4]$b$185 [0] } = 6'110010
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][5][8]$243:
+      Old ports: A=$memory\sine_rom.quarter_rom$rdmux[0][5][8]$a$244, B=$memory\sine_rom.quarter_rom$rdmux[0][5][8]$b$245, Y=$memory\sine_rom.quarter_rom$rdmux[0][4][4]$a$184
+      New ports: A={ 2'01 $memory\sine_rom.quarter_rom$rdmux[0][5][8]$a$244 [3] $memory\sine_rom.quarter_rom$rdmux[0][5][8]$a$244 [3] $memory\sine_rom.quarter_rom$rdmux[0][5][8]$a$244 [0] 1'1 $memory\sine_rom.quarter_rom$rdmux[0][5][8]$a$244 [0] }, B={ $memory\sine_rom.quarter_rom$rdmux[0][5][8]$b$245 [1:0] $memory\sine_rom.quarter_rom$rdmux[0][5][8]$b$245 [0] 2'11 $memory\sine_rom.quarter_rom$rdmux[0][5][8]$b$245 [1:0] }, Y={ $memory\sine_rom.quarter_rom$rdmux[0][4][4]$a$184 [9] $memory\sine_rom.quarter_rom$rdmux[0][4][4]$a$184 [7:6] $memory\sine_rom.quarter_rom$rdmux[0][4][4]$a$184 [3:0] }
+      New connections: { $memory\sine_rom.quarter_rom$rdmux[0][4][4]$a$184 [10] $memory\sine_rom.quarter_rom$rdmux[0][4][4]$a$184 [8] $memory\sine_rom.quarter_rom$rdmux[0][4][4]$a$184 [5:4] } = { 1'1 $memory\sine_rom.quarter_rom$rdmux[0][4][4]$a$184 [7] $memory\sine_rom.quarter_rom$rdmux[0][4][4]$a$184 [0] 1'0 }
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][5][7]$240:
+      Old ports: A=$memory\sine_rom.quarter_rom$rdmux[0][5][7]$a$241, B=$memory\sine_rom.quarter_rom$rdmux[0][5][7]$b$242, Y=$memory\sine_rom.quarter_rom$rdmux[0][4][3]$b$182
+      New ports: A={ 1'0 $memory\sine_rom.quarter_rom$rdmux[0][5][7]$a$241 [0] 1'1 $memory\sine_rom.quarter_rom$rdmux[0][5][7]$a$241 [0] 1'0 $memory\sine_rom.quarter_rom$rdmux[0][5][7]$a$241 [1:0] }, B={ $memory\sine_rom.quarter_rom$rdmux[0][5][7]$b$242 [7] 1'0 $memory\sine_rom.quarter_rom$rdmux[0][5][7]$b$242 [2] $memory\sine_rom.quarter_rom$rdmux[0][5][7]$b$242 [2] $memory\sine_rom.quarter_rom$rdmux[0][5][7]$b$242 [2] 2'11 }, Y={ $memory\sine_rom.quarter_rom$rdmux[0][4][3]$b$182 [7] $memory\sine_rom.quarter_rom$rdmux[0][4][3]$b$182 [5:0] }
+      New connections: { $memory\sine_rom.quarter_rom$rdmux[0][4][3]$b$182 [10:8] $memory\sine_rom.quarter_rom$rdmux[0][4][3]$b$182 [6] } = { 3'101 $memory\sine_rom.quarter_rom$rdmux[0][4][3]$b$182 [2] }
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][5][6]$237:
+      Old ports: A=$memory\sine_rom.quarter_rom$rdmux[0][5][6]$a$238, B=$memory\sine_rom.quarter_rom$rdmux[0][5][6]$b$239, Y=$memory\sine_rom.quarter_rom$rdmux[0][4][3]$a$181
+      New ports: A={ $memory\sine_rom.quarter_rom$rdmux[0][5][6]$a$238 [0] 1'1 $memory\sine_rom.quarter_rom$rdmux[0][5][6]$a$238 [1] $memory\sine_rom.quarter_rom$rdmux[0][5][6]$a$238 [1:0] }, B={ $memory\sine_rom.quarter_rom$rdmux[0][5][6]$b$239 [3] 1'0 $memory\sine_rom.quarter_rom$rdmux[0][5][6]$b$239 [3] 2'11 }, Y={ $memory\sine_rom.quarter_rom$rdmux[0][4][3]$a$181 [5:3] $memory\sine_rom.quarter_rom$rdmux[0][4][3]$a$181 [1:0] }
+      New connections: { $memory\sine_rom.quarter_rom$rdmux[0][4][3]$a$181 [10:6] $memory\sine_rom.quarter_rom$rdmux[0][4][3]$a$181 [2] } = { 3'100 $memory\sine_rom.quarter_rom$rdmux[0][4][3]$a$181 [1:0] 1'0 }
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][5][5]$234:
+      Old ports: A=$memory\sine_rom.quarter_rom$rdmux[0][5][5]$a$235, B=$memory\sine_rom.quarter_rom$rdmux[0][5][5]$b$236, Y=$memory\sine_rom.quarter_rom$rdmux[0][4][2]$b$179
+      New ports: A={ 2'01 $memory\sine_rom.quarter_rom$rdmux[0][5][5]$a$235 [4] $memory\sine_rom.quarter_rom$rdmux[0][5][5]$a$235 [4] 1'0 $memory\sine_rom.quarter_rom$rdmux[0][5][5]$a$235 [2] 2'01 }, B={ 3'100 $memory\sine_rom.quarter_rom$rdmux[0][5][5]$b$236 [3] $memory\sine_rom.quarter_rom$rdmux[0][5][5]$b$236 [3] 1'1 $memory\sine_rom.quarter_rom$rdmux[0][5][5]$b$236 [0] $memory\sine_rom.quarter_rom$rdmux[0][5][5]$b$236 [0] }, Y={ $memory\sine_rom.quarter_rom$rdmux[0][4][2]$b$179 [10] $memory\sine_rom.quarter_rom$rdmux[0][4][2]$b$179 [7] $memory\sine_rom.quarter_rom$rdmux[0][4][2]$b$179 [5:0] }
+      New connections: { $memory\sine_rom.quarter_rom$rdmux[0][4][2]$b$179 [9:8] $memory\sine_rom.quarter_rom$rdmux[0][4][2]$b$179 [6] } = { $memory\sine_rom.quarter_rom$rdmux[0][4][2]$b$179 [7] $memory\sine_rom.quarter_rom$rdmux[0][4][2]$b$179 [7] $memory\sine_rom.quarter_rom$rdmux[0][4][2]$b$179 [0] }
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][5][4]$231:
+      Old ports: A=$memory\sine_rom.quarter_rom$rdmux[0][5][4]$a$232, B=$memory\sine_rom.quarter_rom$rdmux[0][5][4]$b$233, Y=$memory\sine_rom.quarter_rom$rdmux[0][4][2]$a$178
+      New ports: A={ 2'00 $memory\sine_rom.quarter_rom$rdmux[0][5][4]$a$232 [4] $memory\sine_rom.quarter_rom$rdmux[0][5][4]$a$232 [4] 1'1 $memory\sine_rom.quarter_rom$rdmux[0][5][4]$a$232 [1] 1'1 }, B={ $memory\sine_rom.quarter_rom$rdmux[0][5][4]$b$233 [4] $memory\sine_rom.quarter_rom$rdmux[0][5][4]$b$233 [0] $memory\sine_rom.quarter_rom$rdmux[0][5][4]$b$233 [0] $memory\sine_rom.quarter_rom$rdmux[0][5][4]$b$233 [4] 1'0 $memory\sine_rom.quarter_rom$rdmux[0][5][4]$b$233 [0] $memory\sine_rom.quarter_rom$rdmux[0][5][4]$b$233 [0] }, Y={ $memory\sine_rom.quarter_rom$rdmux[0][4][2]$a$178 [7:4] $memory\sine_rom.quarter_rom$rdmux[0][4][2]$a$178 [2:0] }
+      New connections: { $memory\sine_rom.quarter_rom$rdmux[0][4][2]$a$178 [10:8] $memory\sine_rom.quarter_rom$rdmux[0][4][2]$a$178 [3] } = 4'0111
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][5][3]$228:
+      Old ports: A=$memory\sine_rom.quarter_rom$rdmux[0][5][3]$a$229, B=$memory\sine_rom.quarter_rom$rdmux[0][5][3]$b$230, Y=$memory\sine_rom.quarter_rom$rdmux[0][4][1]$b$176
+      New ports: A={ $memory\sine_rom.quarter_rom$rdmux[0][5][3]$a$229 [7] $memory\sine_rom.quarter_rom$rdmux[0][5][3]$a$229 [4] 1'0 $memory\sine_rom.quarter_rom$rdmux[0][5][3]$a$229 [4] 2'10 }, B={ 1'1 $memory\sine_rom.quarter_rom$rdmux[0][5][3]$b$230 [6] 1'1 $memory\sine_rom.quarter_rom$rdmux[0][5][3]$b$230 [0] 1'0 $memory\sine_rom.quarter_rom$rdmux[0][5][3]$b$230 [0] }, Y={ $memory\sine_rom.quarter_rom$rdmux[0][4][1]$b$176 [7:4] $memory\sine_rom.quarter_rom$rdmux[0][4][1]$b$176 [1:0] }
+      New connections: { $memory\sine_rom.quarter_rom$rdmux[0][4][1]$b$176 [10:8] $memory\sine_rom.quarter_rom$rdmux[0][4][1]$b$176 [3:2] } = 5'01000
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][5][2]$225:
+      Old ports: A=$memory\sine_rom.quarter_rom$rdmux[0][5][2]$a$226, B=$memory\sine_rom.quarter_rom$rdmux[0][5][2]$b$227, Y=$memory\sine_rom.quarter_rom$rdmux[0][4][1]$a$175
+      New ports: A={ 2'01 $memory\sine_rom.quarter_rom$rdmux[0][5][2]$a$226 [6] 2'00 $memory\sine_rom.quarter_rom$rdmux[0][5][2]$a$226 [0] $memory\sine_rom.quarter_rom$rdmux[0][5][2]$a$226 [0] $memory\sine_rom.quarter_rom$rdmux[0][5][2]$a$226 [0] }, B={ $memory\sine_rom.quarter_rom$rdmux[0][5][2]$b$227 [1:0] $memory\sine_rom.quarter_rom$rdmux[0][5][2]$b$227 [0] 1'1 $memory\sine_rom.quarter_rom$rdmux[0][5][2]$b$227 [0] 1'0 $memory\sine_rom.quarter_rom$rdmux[0][5][2]$b$227 [1:0] }, Y={ $memory\sine_rom.quarter_rom$rdmux[0][4][1]$a$175 [9] $memory\sine_rom.quarter_rom$rdmux[0][4][1]$a$175 [7:4] $memory\sine_rom.quarter_rom$rdmux[0][4][1]$a$175 [2:0] }
+      New connections: { $memory\sine_rom.quarter_rom$rdmux[0][4][1]$a$175 [10] $memory\sine_rom.quarter_rom$rdmux[0][4][1]$a$175 [8] $memory\sine_rom.quarter_rom$rdmux[0][4][1]$a$175 [3] } = { 1'0 $memory\sine_rom.quarter_rom$rdmux[0][4][1]$a$175 [7] $memory\sine_rom.quarter_rom$rdmux[0][4][1]$a$175 [2] }
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][5][1]$222:
+      Old ports: A=$memory\sine_rom.quarter_rom$rdmux[0][5][1]$a$223, B=$memory\sine_rom.quarter_rom$rdmux[0][5][1]$b$224, Y=$memory\sine_rom.quarter_rom$rdmux[0][4][0]$b$173
+      New ports: A={ 2'11 $memory\sine_rom.quarter_rom$rdmux[0][5][1]$a$223 [1] 1'0 $memory\sine_rom.quarter_rom$rdmux[0][5][1]$a$223 [1] }, B={ 1'0 $memory\sine_rom.quarter_rom$rdmux[0][5][1]$b$224 [1] $memory\sine_rom.quarter_rom$rdmux[0][5][1]$b$224 [5] 1'1 $memory\sine_rom.quarter_rom$rdmux[0][5][1]$b$224 [1] }, Y={ $memory\sine_rom.quarter_rom$rdmux[0][4][0]$b$173 [7:5] $memory\sine_rom.quarter_rom$rdmux[0][4][0]$b$173 [2:1] }
+      New connections: { $memory\sine_rom.quarter_rom$rdmux[0][4][0]$b$173 [10:8] $memory\sine_rom.quarter_rom$rdmux[0][4][0]$b$173 [4:3] $memory\sine_rom.quarter_rom$rdmux[0][4][0]$b$173 [0] } = { 2'00 $memory\sine_rom.quarter_rom$rdmux[0][4][0]$b$173 [2:1] 2'10 }
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][5][0]$219:
+      Old ports: A=$memory\sine_rom.quarter_rom$rdmux[0][5][0]$a$220, B=$memory\sine_rom.quarter_rom$rdmux[0][5][0]$b$221, Y=$memory\sine_rom.quarter_rom$rdmux[0][4][0]$a$172
+      New ports: A={ 2'00 $memory\sine_rom.quarter_rom$rdmux[0][5][0]$a$220 [1] 1'0 $memory\sine_rom.quarter_rom$rdmux[0][5][0]$a$220 [1] }, B={ $memory\sine_rom.quarter_rom$rdmux[0][5][0]$b$221 [1] $memory\sine_rom.quarter_rom$rdmux[0][5][0]$b$221 [5] $memory\sine_rom.quarter_rom$rdmux[0][5][0]$b$221 [5] 1'1 $memory\sine_rom.quarter_rom$rdmux[0][5][0]$b$221 [1] }, Y={ $memory\sine_rom.quarter_rom$rdmux[0][4][0]$a$172 [7:5] $memory\sine_rom.quarter_rom$rdmux[0][4][0]$a$172 [2:1] }
+      New connections: { $memory\sine_rom.quarter_rom$rdmux[0][4][0]$a$172 [10:8] $memory\sine_rom.quarter_rom$rdmux[0][4][0]$a$172 [4:3] $memory\sine_rom.quarter_rom$rdmux[0][4][0]$a$172 [0] } = { 3'000 $memory\sine_rom.quarter_rom$rdmux[0][4][0]$a$172 [1] 2'00 }
+  Optimizing cells in module \lfm_wavecore_quarter.
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][4][8]$195:
+      Old ports: A=$memory\sine_rom.quarter_rom$rdmux[0][4][8]$a$196, B=11'x, Y=$memory\sine_rom.quarter_rom$rdmux[0][3][4]$a$160
+      New ports: A=$memory\sine_rom.quarter_rom$rdmux[0][4][8]$a$196 [0], B=1'x, Y=$memory\sine_rom.quarter_rom$rdmux[0][3][4]$a$160 [0]
+      New connections: $memory\sine_rom.quarter_rom$rdmux[0][3][4]$a$160 [10:1] = { $memory\sine_rom.quarter_rom$rdmux[0][3][4]$a$160 [0] $memory\sine_rom.quarter_rom$rdmux[0][3][4]$a$160 [0] $memory\sine_rom.quarter_rom$rdmux[0][3][4]$a$160 [0] $memory\sine_rom.quarter_rom$rdmux[0][3][4]$a$160 [0] $memory\sine_rom.quarter_rom$rdmux[0][3][4]$a$160 [0] $memory\sine_rom.quarter_rom$rdmux[0][3][4]$a$160 [0] $memory\sine_rom.quarter_rom$rdmux[0][3][4]$a$160 [0] $memory\sine_rom.quarter_rom$rdmux[0][3][4]$a$160 [0] $memory\sine_rom.quarter_rom$rdmux[0][3][4]$a$160 [0] $memory\sine_rom.quarter_rom$rdmux[0][3][4]$a$160 [0] }
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][4][7]$192:
+      Old ports: A=$memory\sine_rom.quarter_rom$rdmux[0][4][7]$a$193, B=$memory\sine_rom.quarter_rom$rdmux[0][4][7]$b$194, Y=$memory\sine_rom.quarter_rom$rdmux[0][3][3]$b$158
+      New ports: A={ $memory\sine_rom.quarter_rom$rdmux[0][4][7]$a$193 [5:3] 2'00 $memory\sine_rom.quarter_rom$rdmux[0][4][7]$a$193 [0] }, B={ 2'11 $memory\sine_rom.quarter_rom$rdmux[0][4][7]$b$194 [3:0] }, Y=$memory\sine_rom.quarter_rom$rdmux[0][3][3]$b$158 [5:0]
+      New connections: $memory\sine_rom.quarter_rom$rdmux[0][3][3]$b$158 [10:6] = 5'11111
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][4][6]$189:
+      Old ports: A=$memory\sine_rom.quarter_rom$rdmux[0][4][6]$a$190, B=$memory\sine_rom.quarter_rom$rdmux[0][4][6]$b$191, Y=$memory\sine_rom.quarter_rom$rdmux[0][3][3]$a$157
+      New ports: A={ $memory\sine_rom.quarter_rom$rdmux[0][4][6]$a$190 [7] $memory\sine_rom.quarter_rom$rdmux[0][4][6]$a$190 [5] $memory\sine_rom.quarter_rom$rdmux[0][4][6]$a$190 [5:0] }, B={ 1'1 $memory\sine_rom.quarter_rom$rdmux[0][4][6]$b$191 [6:3] $memory\sine_rom.quarter_rom$rdmux[0][4][6]$b$191 [0] $memory\sine_rom.quarter_rom$rdmux[0][4][6]$b$191 [1:0] }, Y=$memory\sine_rom.quarter_rom$rdmux[0][3][3]$a$157 [7:0]
+      New connections: $memory\sine_rom.quarter_rom$rdmux[0][3][3]$a$157 [10:8] = 3'111
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][4][5]$186:
+      Old ports: A=$memory\sine_rom.quarter_rom$rdmux[0][4][5]$a$187, B=$memory\sine_rom.quarter_rom$rdmux[0][4][5]$b$188, Y=$memory\sine_rom.quarter_rom$rdmux[0][3][2]$b$155
+      New ports: A={ 2'01 $memory\sine_rom.quarter_rom$rdmux[0][4][5]$a$187 [6:0] }, B={ 2'10 $memory\sine_rom.quarter_rom$rdmux[0][4][5]$b$188 [6:0] }, Y=$memory\sine_rom.quarter_rom$rdmux[0][3][2]$b$155 [8:0]
+      New connections: $memory\sine_rom.quarter_rom$rdmux[0][3][2]$b$155 [10:9] = 2'11
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][4][4]$183:
+      Old ports: A=$memory\sine_rom.quarter_rom$rdmux[0][4][4]$a$184, B=$memory\sine_rom.quarter_rom$rdmux[0][4][4]$b$185, Y=$memory\sine_rom.quarter_rom$rdmux[0][3][2]$a$154
+      New ports: A={ $memory\sine_rom.quarter_rom$rdmux[0][4][4]$a$184 [9] $memory\sine_rom.quarter_rom$rdmux[0][4][4]$a$184 [7] $memory\sine_rom.quarter_rom$rdmux[0][4][4]$a$184 [7:6] $memory\sine_rom.quarter_rom$rdmux[0][4][4]$a$184 [0] $memory\sine_rom.quarter_rom$rdmux[0][4][4]$a$184 [3:0] }, B={ 2'10 $memory\sine_rom.quarter_rom$rdmux[0][4][4]$b$185 [7:5] 1'1 $memory\sine_rom.quarter_rom$rdmux[0][4][4]$b$185 [2:1] 1'0 }, Y={ $memory\sine_rom.quarter_rom$rdmux[0][3][2]$a$154 [9:5] $memory\sine_rom.quarter_rom$rdmux[0][3][2]$a$154 [3:0] }
+      New connections: { $memory\sine_rom.quarter_rom$rdmux[0][3][2]$a$154 [10] $memory\sine_rom.quarter_rom$rdmux[0][3][2]$a$154 [4] } = 2'10
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][4][3]$180:
+      Old ports: A=$memory\sine_rom.quarter_rom$rdmux[0][4][3]$a$181, B=$memory\sine_rom.quarter_rom$rdmux[0][4][3]$b$182, Y=$memory\sine_rom.quarter_rom$rdmux[0][3][1]$b$152
+      New ports: A={ 1'0 $memory\sine_rom.quarter_rom$rdmux[0][4][3]$a$181 [1:0] $memory\sine_rom.quarter_rom$rdmux[0][4][3]$a$181 [5:3] 1'0 $memory\sine_rom.quarter_rom$rdmux[0][4][3]$a$181 [1:0] }, B={ 1'1 $memory\sine_rom.quarter_rom$rdmux[0][4][3]$b$182 [7] $memory\sine_rom.quarter_rom$rdmux[0][4][3]$b$182 [2] $memory\sine_rom.quarter_rom$rdmux[0][4][3]$b$182 [5:0] }, Y=$memory\sine_rom.quarter_rom$rdmux[0][3][1]$b$152 [8:0]
+      New connections: $memory\sine_rom.quarter_rom$rdmux[0][3][1]$b$152 [10:9] = 2'10
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][4][2]$177:
+      Old ports: A=$memory\sine_rom.quarter_rom$rdmux[0][4][2]$a$178, B=$memory\sine_rom.quarter_rom$rdmux[0][4][2]$b$179, Y=$memory\sine_rom.quarter_rom$rdmux[0][3][1]$a$151
+      New ports: A={ 2'01 $memory\sine_rom.quarter_rom$rdmux[0][4][2]$a$178 [7:4] 1'1 $memory\sine_rom.quarter_rom$rdmux[0][4][2]$a$178 [2:0] }, B={ $memory\sine_rom.quarter_rom$rdmux[0][4][2]$b$179 [10] $memory\sine_rom.quarter_rom$rdmux[0][4][2]$b$179 [7] $memory\sine_rom.quarter_rom$rdmux[0][4][2]$b$179 [7] $memory\sine_rom.quarter_rom$rdmux[0][4][2]$b$179 [0] $memory\sine_rom.quarter_rom$rdmux[0][4][2]$b$179 [5:0] }, Y={ $memory\sine_rom.quarter_rom$rdmux[0][3][1]$a$151 [10] $memory\sine_rom.quarter_rom$rdmux[0][3][1]$a$151 [8:0] }
+      New connections: $memory\sine_rom.quarter_rom$rdmux[0][3][1]$a$151 [9] = $memory\sine_rom.quarter_rom$rdmux[0][3][1]$a$151 [8]
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][4][1]$174:
+      Old ports: A=$memory\sine_rom.quarter_rom$rdmux[0][4][1]$a$175, B=$memory\sine_rom.quarter_rom$rdmux[0][4][1]$b$176, Y=$memory\sine_rom.quarter_rom$rdmux[0][3][0]$b$149
+      New ports: A={ $memory\sine_rom.quarter_rom$rdmux[0][4][1]$a$175 [9] $memory\sine_rom.quarter_rom$rdmux[0][4][1]$a$175 [7] $memory\sine_rom.quarter_rom$rdmux[0][4][1]$a$175 [7:4] $memory\sine_rom.quarter_rom$rdmux[0][4][1]$a$175 [2:0] }, B={ 2'10 $memory\sine_rom.quarter_rom$rdmux[0][4][1]$b$176 [7:4] 1'0 $memory\sine_rom.quarter_rom$rdmux[0][4][1]$b$176 [1:0] }, Y={ $memory\sine_rom.quarter_rom$rdmux[0][3][0]$b$149 [9:4] $memory\sine_rom.quarter_rom$rdmux[0][3][0]$b$149 [2:0] }
+      New connections: { $memory\sine_rom.quarter_rom$rdmux[0][3][0]$b$149 [10] $memory\sine_rom.quarter_rom$rdmux[0][3][0]$b$149 [3] } = { 1'0 $memory\sine_rom.quarter_rom$rdmux[0][3][0]$b$149 [2] }
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][4][0]$171:
+      Old ports: A=$memory\sine_rom.quarter_rom$rdmux[0][4][0]$a$172, B=$memory\sine_rom.quarter_rom$rdmux[0][4][0]$b$173, Y=$memory\sine_rom.quarter_rom$rdmux[0][3][0]$a$148
+      New ports: A={ 1'0 $memory\sine_rom.quarter_rom$rdmux[0][4][0]$a$172 [7:5] 1'0 $memory\sine_rom.quarter_rom$rdmux[0][4][0]$a$172 [2:1] }, B={ $memory\sine_rom.quarter_rom$rdmux[0][4][0]$b$173 [2] $memory\sine_rom.quarter_rom$rdmux[0][4][0]$b$173 [7:5] 1'1 $memory\sine_rom.quarter_rom$rdmux[0][4][0]$b$173 [2:1] }, Y={ $memory\sine_rom.quarter_rom$rdmux[0][3][0]$a$148 [8:5] $memory\sine_rom.quarter_rom$rdmux[0][3][0]$a$148 [3:1] }
+      New connections: { $memory\sine_rom.quarter_rom$rdmux[0][3][0]$a$148 [10:9] $memory\sine_rom.quarter_rom$rdmux[0][3][0]$a$148 [4] $memory\sine_rom.quarter_rom$rdmux[0][3][0]$a$148 [0] } = { 2'00 $memory\sine_rom.quarter_rom$rdmux[0][3][0]$a$148 [1] 1'0 }
+  Optimizing cells in module \lfm_wavecore_quarter.
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][3][4]$159:
+      Old ports: A=$memory\sine_rom.quarter_rom$rdmux[0][3][4]$a$160, B=11'x, Y=$memory\sine_rom.quarter_rom$rdmux[0][2][2]$a$142
+      New ports: A=$memory\sine_rom.quarter_rom$rdmux[0][3][4]$a$160 [0], B=1'x, Y=$memory\sine_rom.quarter_rom$rdmux[0][2][2]$a$142 [0]
+      New connections: $memory\sine_rom.quarter_rom$rdmux[0][2][2]$a$142 [10:1] = { $memory\sine_rom.quarter_rom$rdmux[0][2][2]$a$142 [0] $memory\sine_rom.quarter_rom$rdmux[0][2][2]$a$142 [0] $memory\sine_rom.quarter_rom$rdmux[0][2][2]$a$142 [0] $memory\sine_rom.quarter_rom$rdmux[0][2][2]$a$142 [0] $memory\sine_rom.quarter_rom$rdmux[0][2][2]$a$142 [0] $memory\sine_rom.quarter_rom$rdmux[0][2][2]$a$142 [0] $memory\sine_rom.quarter_rom$rdmux[0][2][2]$a$142 [0] $memory\sine_rom.quarter_rom$rdmux[0][2][2]$a$142 [0] $memory\sine_rom.quarter_rom$rdmux[0][2][2]$a$142 [0] $memory\sine_rom.quarter_rom$rdmux[0][2][2]$a$142 [0] }
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][3][3]$156:
+      Old ports: A=$memory\sine_rom.quarter_rom$rdmux[0][3][3]$a$157, B=$memory\sine_rom.quarter_rom$rdmux[0][3][3]$b$158, Y=$memory\sine_rom.quarter_rom$rdmux[0][2][1]$b$140
+      New ports: A=$memory\sine_rom.quarter_rom$rdmux[0][3][3]$a$157 [7:0], B={ 2'11 $memory\sine_rom.quarter_rom$rdmux[0][3][3]$b$158 [5:0] }, Y=$memory\sine_rom.quarter_rom$rdmux[0][2][1]$b$140 [7:0]
+      New connections: $memory\sine_rom.quarter_rom$rdmux[0][2][1]$b$140 [10:8] = 3'111
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][3][2]$153:
+      Old ports: A=$memory\sine_rom.quarter_rom$rdmux[0][3][2]$a$154, B=$memory\sine_rom.quarter_rom$rdmux[0][3][2]$b$155, Y=$memory\sine_rom.quarter_rom$rdmux[0][2][1]$a$139
+      New ports: A={ $memory\sine_rom.quarter_rom$rdmux[0][3][2]$a$154 [9:5] 1'0 $memory\sine_rom.quarter_rom$rdmux[0][3][2]$a$154 [3:0] }, B={ 1'1 $memory\sine_rom.quarter_rom$rdmux[0][3][2]$b$155 [8:0] }, Y=$memory\sine_rom.quarter_rom$rdmux[0][2][1]$a$139 [9:0]
+      New connections: $memory\sine_rom.quarter_rom$rdmux[0][2][1]$a$139 [10] = 1'1
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][3][0]$147:
+      Old ports: A=$memory\sine_rom.quarter_rom$rdmux[0][3][0]$a$148, B=$memory\sine_rom.quarter_rom$rdmux[0][3][0]$b$149, Y=$memory\sine_rom.quarter_rom$rdmux[0][2][0]$a$136
+      New ports: A={ 1'0 $memory\sine_rom.quarter_rom$rdmux[0][3][0]$a$148 [8:5] $memory\sine_rom.quarter_rom$rdmux[0][3][0]$a$148 [1] $memory\sine_rom.quarter_rom$rdmux[0][3][0]$a$148 [3:1] 1'0 }, B={ $memory\sine_rom.quarter_rom$rdmux[0][3][0]$b$149 [9:4] $memory\sine_rom.quarter_rom$rdmux[0][3][0]$b$149 [2] $memory\sine_rom.quarter_rom$rdmux[0][3][0]$b$149 [2:0] }, Y=$memory\sine_rom.quarter_rom$rdmux[0][2][0]$a$136 [9:0]
+      New connections: $memory\sine_rom.quarter_rom$rdmux[0][2][0]$a$136 [10] = 1'0
+  Optimizing cells in module \lfm_wavecore_quarter.
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][2][2]$141:
+      Old ports: A=$memory\sine_rom.quarter_rom$rdmux[0][2][2]$a$142, B=11'x, Y=$memory\sine_rom.quarter_rom$rdmux[0][1][1]$a$133
+      New ports: A=$memory\sine_rom.quarter_rom$rdmux[0][2][2]$a$142 [0], B=1'x, Y=$memory\sine_rom.quarter_rom$rdmux[0][1][1]$a$133 [0]
+      New connections: $memory\sine_rom.quarter_rom$rdmux[0][1][1]$a$133 [10:1] = { $memory\sine_rom.quarter_rom$rdmux[0][1][1]$a$133 [0] $memory\sine_rom.quarter_rom$rdmux[0][1][1]$a$133 [0] $memory\sine_rom.quarter_rom$rdmux[0][1][1]$a$133 [0] $memory\sine_rom.quarter_rom$rdmux[0][1][1]$a$133 [0] $memory\sine_rom.quarter_rom$rdmux[0][1][1]$a$133 [0] $memory\sine_rom.quarter_rom$rdmux[0][1][1]$a$133 [0] $memory\sine_rom.quarter_rom$rdmux[0][1][1]$a$133 [0] $memory\sine_rom.quarter_rom$rdmux[0][1][1]$a$133 [0] $memory\sine_rom.quarter_rom$rdmux[0][1][1]$a$133 [0] $memory\sine_rom.quarter_rom$rdmux[0][1][1]$a$133 [0] }
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][2][1]$138:
+      Old ports: A=$memory\sine_rom.quarter_rom$rdmux[0][2][1]$a$139, B=$memory\sine_rom.quarter_rom$rdmux[0][2][1]$b$140, Y=$memory\sine_rom.quarter_rom$rdmux[0][1][0]$b$131
+      New ports: A=$memory\sine_rom.quarter_rom$rdmux[0][2][1]$a$139 [9:0], B={ 2'11 $memory\sine_rom.quarter_rom$rdmux[0][2][1]$b$140 [7:0] }, Y=$memory\sine_rom.quarter_rom$rdmux[0][1][0]$b$131 [9:0]
+      New connections: $memory\sine_rom.quarter_rom$rdmux[0][1][0]$b$131 [10] = 1'1
+  Optimizing cells in module \lfm_wavecore_quarter.
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][1][1]$132:
+      Old ports: A=$memory\sine_rom.quarter_rom$rdmux[0][1][1]$a$133, B=11'x, Y=$memory\sine_rom.quarter_rom$rdmux[0][0][0]$b$128
+      New ports: A=$memory\sine_rom.quarter_rom$rdmux[0][1][1]$a$133 [0], B=1'x, Y=$memory\sine_rom.quarter_rom$rdmux[0][0][0]$b$128 [0]
+      New connections: $memory\sine_rom.quarter_rom$rdmux[0][0][0]$b$128 [10:1] = { $memory\sine_rom.quarter_rom$rdmux[0][0][0]$b$128 [0] $memory\sine_rom.quarter_rom$rdmux[0][0][0]$b$128 [0] $memory\sine_rom.quarter_rom$rdmux[0][0][0]$b$128 [0] $memory\sine_rom.quarter_rom$rdmux[0][0][0]$b$128 [0] $memory\sine_rom.quarter_rom$rdmux[0][0][0]$b$128 [0] $memory\sine_rom.quarter_rom$rdmux[0][0][0]$b$128 [0] $memory\sine_rom.quarter_rom$rdmux[0][0][0]$b$128 [0] $memory\sine_rom.quarter_rom$rdmux[0][0][0]$b$128 [0] $memory\sine_rom.quarter_rom$rdmux[0][0][0]$b$128 [0] $memory\sine_rom.quarter_rom$rdmux[0][0][0]$b$128 [0] }
+  Optimizing cells in module \lfm_wavecore_quarter.
+Performed a total of 66 changes.
+
+5.20.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\lfm_wavecore_quarter'.
+<suppressed ~87 debug messages>
+Removed a total of 29 cells.
+
+5.20.6. Executing OPT_SHARE pass.
+
+5.20.7. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.20.8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \lfm_wavecore_quarter..
+Removed 0 unused cells and 214 unused wires.
+<suppressed ~1 debug messages>
+
+5.20.9. Executing OPT_EXPR pass (perform const folding).
+Optimizing module lfm_wavecore_quarter.
+<suppressed ~7 debug messages>
+
+5.20.10. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.20.11. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \lfm_wavecore_quarter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~9 debug messages>
+
+5.20.12. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \lfm_wavecore_quarter.
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][5][10]$249:
+      Old ports: A={ $memory\sine_rom.quarter_rom$rdmux[0][5][0]$b$221 [7:6] 2'00 $memory\sine_rom.quarter_rom$rdmux[0][5][0]$b$221 [6] $memory\sine_rom.quarter_rom$rdmux[0][5][0]$b$221 [6] $memory\sine_rom.quarter_rom$rdmux[0][5][0]$b$221 [7] }, B={ 1'1 $memory\sine_rom.quarter_rom$rdmux[0][5][0]$b$221 [7] 1'1 $memory\sine_rom.quarter_rom$rdmux[0][5][0]$b$221 [6] 2'10 $memory\sine_rom.quarter_rom$rdmux[0][5][0]$b$221 [7] }, Y=$memory\sine_rom.quarter_rom$rdmux[0][4][5]$a$187 [6:0]
+      New ports: A={ $memory\sine_rom.quarter_rom$rdmux[0][5][0]$b$221 [7:6] 2'00 $memory\sine_rom.quarter_rom$rdmux[0][5][0]$b$221 [6] $memory\sine_rom.quarter_rom$rdmux[0][5][0]$b$221 [6] }, B={ 1'1 $memory\sine_rom.quarter_rom$rdmux[0][5][0]$b$221 [7] 1'1 $memory\sine_rom.quarter_rom$rdmux[0][5][0]$b$221 [6] 2'10 }, Y=$memory\sine_rom.quarter_rom$rdmux[0][4][5]$a$187 [6:1]
+      New connections: $memory\sine_rom.quarter_rom$rdmux[0][4][5]$a$187 [0] = $memory\sine_rom.quarter_rom$rdmux[0][5][0]$b$221 [7]
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][5][12]$255:
+      Old ports: A={ 2'01 $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [5] 1'0 $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [5] 1'1 $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [3] }, B={ 2'10 $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [5] $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [5] $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [3] $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [3] $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [3] }, Y={ $memory\sine_rom.quarter_rom$rdmux[0][4][6]$a$190 [7:6] $memory\sine_rom.quarter_rom$rdmux[0][4][6]$a$190 [4:0] }
+      New ports: A={ 3'010 $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [5] 1'1 }, B={ 2'10 $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [5] $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [3] $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [3] }, Y={ $memory\sine_rom.quarter_rom$rdmux[0][4][6]$a$190 [7:6] $memory\sine_rom.quarter_rom$rdmux[0][4][6]$a$190 [3:1] }
+      New connections: { $memory\sine_rom.quarter_rom$rdmux[0][4][6]$a$190 [4] $memory\sine_rom.quarter_rom$rdmux[0][4][6]$a$190 [0] } = { $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [5] $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [3] }
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][5][2]$225:
+      Old ports: A={ 2'01 $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [5] 2'00 $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [3] $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [3] $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [3] }, B={ $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [5] $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [3] $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [3] 1'1 $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [3] 1'0 $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [5] $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [3] }, Y={ $memory\sine_rom.quarter_rom$rdmux[0][4][1]$a$175 [9:8] $memory\sine_rom.quarter_rom$rdmux[0][4][1]$a$175 [6:3] $memory\sine_rom.quarter_rom$rdmux[0][4][1]$a$175 [1:0] }
+      New ports: A={ 2'01 $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [5] 2'00 $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [3] $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [3] }, B={ $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [5] $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [3] $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [3] 1'1 $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [3] 1'0 $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [5] }, Y={ $memory\sine_rom.quarter_rom$rdmux[0][4][1]$a$175 [9:8] $memory\sine_rom.quarter_rom$rdmux[0][4][1]$a$175 [6:3] $memory\sine_rom.quarter_rom$rdmux[0][4][1]$a$175 [1] }
+      New connections: $memory\sine_rom.quarter_rom$rdmux[0][4][1]$a$175 [0] = $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [3]
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][5][3]$228:
+      Old ports: A={ $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [5] $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [3] 1'0 $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [3] 2'10 }, B={ 1'1 $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [5] 1'1 $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [3] 1'0 $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [3] }, Y={ $memory\sine_rom.quarter_rom$rdmux[0][4][1]$b$176 [7:4] $memory\sine_rom.quarter_rom$rdmux[0][4][1]$b$176 [1:0] }
+      New ports: A={ $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [5] $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [3] 3'010 }, B={ 1'1 $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [5] 2'10 $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [3] }, Y={ $memory\sine_rom.quarter_rom$rdmux[0][4][1]$b$176 [7:5] $memory\sine_rom.quarter_rom$rdmux[0][4][1]$b$176 [1:0] }
+      New connections: $memory\sine_rom.quarter_rom$rdmux[0][4][1]$b$176 [4] = $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [3]
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][5][4]$231:
+      Old ports: A={ 2'00 $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [5] $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [5] 1'1 $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [3] 1'1 }, B={ $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [5] $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [3] $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [3] $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [5] 1'0 $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [3] $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [3] }, Y={ $memory\sine_rom.quarter_rom$rdmux[0][4][2]$a$178 [7:4] $memory\sine_rom.quarter_rom$rdmux[0][4][2]$a$178 [2:0] }
+      New ports: A={ 2'00 $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [5] 2'11 }, B={ $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [5] $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [3] $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [3] 1'0 $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [3] }, Y={ $memory\sine_rom.quarter_rom$rdmux[0][4][2]$a$178 [7:5] $memory\sine_rom.quarter_rom$rdmux[0][4][2]$a$178 [2] $memory\sine_rom.quarter_rom$rdmux[0][4][2]$a$178 [0] }
+      New connections: { $memory\sine_rom.quarter_rom$rdmux[0][4][2]$a$178 [4] $memory\sine_rom.quarter_rom$rdmux[0][4][2]$a$178 [1] } = { $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [5] $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [3] }
+    Consolidated identical input bits for $mux cell $memory\sine_rom.quarter_rom$rdmux[0][5][8]$243:
+      Old ports: A={ 2'01 $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [5] $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [5] $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [3] 1'1 $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [3] }, B={ $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [5] $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [3] $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [3] 2'11 $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [5] $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [3] }, Y={ $memory\sine_rom.quarter_rom$rdmux[0][4][4]$a$184 [9:8] $memory\sine_rom.quarter_rom$rdmux[0][4][4]$a$184 [6] $memory\sine_rom.quarter_rom$rdmux[0][4][4]$a$184 [3:1] $memory\sine_rom.quarter_rom$rdmux[0][4][4]$a$184 [5] }
+      New ports: A={ 2'01 $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [5] $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [5] $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [3] 1'1 }, B={ $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [5] $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [3] $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [3] 2'11 $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [5] }, Y={ $memory\sine_rom.quarter_rom$rdmux[0][4][4]$a$184 [9:8] $memory\sine_rom.quarter_rom$rdmux[0][4][4]$a$184 [6] $memory\sine_rom.quarter_rom$rdmux[0][4][4]$a$184 [3:1] }
+      New connections: $memory\sine_rom.quarter_rom$rdmux[0][4][4]$a$184 [5] = $memory\sine_rom.quarter_rom$rdmux[0][5][11]$a$253 [3]
+  Optimizing cells in module \lfm_wavecore_quarter.
+Performed a total of 6 changes.
+
+5.20.13. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\lfm_wavecore_quarter'.
+Removed a total of 0 cells.
+
+5.20.14. Executing OPT_SHARE pass.
+
+5.20.15. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.20.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \lfm_wavecore_quarter..
+Removed 0 unused cells and 8 unused wires.
+<suppressed ~1 debug messages>
+
+5.20.17. Executing OPT_EXPR pass (perform const folding).
+Optimizing module lfm_wavecore_quarter.
+
+5.20.18. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.20.19. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \lfm_wavecore_quarter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~9 debug messages>
+
+5.20.20. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \lfm_wavecore_quarter.
+Performed a total of 0 changes.
+
+5.20.21. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\lfm_wavecore_quarter'.
+Removed a total of 0 cells.
+
+5.20.22. Executing OPT_SHARE pass.
+
+5.20.23. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.20.24. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \lfm_wavecore_quarter..
+
+5.20.25. Executing OPT_EXPR pass (perform const folding).
+Optimizing module lfm_wavecore_quarter.
+
+5.20.26. Finished OPT passes. (There is nothing left to do.)
+
+5.21. Executing TECHMAP pass (map to technology primitives).
+
+5.21.1. Executing Verilog-2005 frontend: /usr/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/usr/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Successfully finished Verilog frontend.
+
+5.21.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $not.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $adffe.
+Using template $paramod$fbc7873bff55778c0b3173955b7e4bce1d9d6834\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $reduce_and.
+Using extmapper simplemap for cells of type $ne.
+Using extmapper simplemap for cells of type $reduce_bool.
+Using extmapper simplemap for cells of type $adff.
+Using extmapper simplemap for cells of type $and.
+Using template $paramod$a1665ef28c749ebcdbe9aecd466e644647b56463\_90_alu for cells of type $alu.
+Using template $paramod$d597a1d02e4b78ac244cbe0a6bc64f098a6f19e7\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $eq.
+Using extmapper simplemap for cells of type $logic_and.
+Using extmapper simplemap for cells of type $xor.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000100000 for cells of type $lcu.
+Using extmapper simplemap for cells of type $pos.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000010000 for cells of type $lcu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000000111 for cells of type $lcu.
+Using extmapper simplemap for cells of type $or.
+No more expansions possible.
+<suppressed ~974 debug messages>
+
+5.22. Executing OPT pass (performing simple optimizations).
+
+5.22.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module lfm_wavecore_quarter.
+<suppressed ~259 debug messages>
+
+5.22.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\lfm_wavecore_quarter'.
+<suppressed ~261 debug messages>
+Removed a total of 87 cells.
+
+5.22.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.22.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \lfm_wavecore_quarter..
+Removed 99 unused cells and 192 unused wires.
+<suppressed ~100 debug messages>
+
+5.22.5. Finished fast OPT passes.
+
+5.23. Executing ABC pass (technology mapping using ABC).
+
+5.23.1. Extracting gate netlist of module `\lfm_wavecore_quarter' to `<abc-temp-dir>/input.blif'..
+Extracted 874 gates and 1039 wires to a netlist network with 163 inputs and 97 outputs.
+
+5.23.1.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: Entered genlib library with 13 gates from file "<abc-temp-dir>/stdcells.genlib".
+ABC: + strash 
+ABC: + dretime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+5.23.1.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:       38
+ABC RESULTS:              XNOR cells:       59
+ABC RESULTS:             ORNOT cells:       34
+ABC RESULTS:               NOT cells:       30
+ABC RESULTS:              NAND cells:       50
+ABC RESULTS:               XOR cells:       98
+ABC RESULTS:               MUX cells:      147
+ABC RESULTS:               NOR cells:       57
+ABC RESULTS:                OR cells:      110
+ABC RESULTS:            ANDNOT cells:      219
+ABC RESULTS:        internal signals:      779
+ABC RESULTS:           input signals:      163
+ABC RESULTS:          output signals:       97
+Removing temp directory.
+
+5.24. Executing OPT pass (performing simple optimizations).
+
+5.24.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module lfm_wavecore_quarter.
+<suppressed ~18 debug messages>
+
+5.24.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\lfm_wavecore_quarter'.
+<suppressed ~33 debug messages>
+Removed a total of 11 cells.
+
+5.24.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.24.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \lfm_wavecore_quarter..
+Removed 0 unused cells and 525 unused wires.
+<suppressed ~1 debug messages>
+
+5.24.5. Finished fast OPT passes.
+
+5.25. Executing HIERARCHY pass (managing design hierarchy).
+
+5.25.1. Analyzing design hierarchy..
+Top module:  \lfm_wavecore_quarter
+
+5.25.2. Analyzing design hierarchy..
+Top module:  \lfm_wavecore_quarter
+Removed 0 unused modules.
+
+5.26. Printing statistics.
+
+=== lfm_wavecore_quarter ===
+
+   Number of wires:                818
+   Number of wire bits:           1170
+   Number of public wires:          30
+   Number of public wire bits:     351
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                913
+     $_ANDNOT_                     216
+     $_AND_                         38
+     $_DFFE_PN0P_                   81
+     $_DFF_PN0_                      1
+     $_MUX_                        147
+     $_NAND_                        50
+     $_NOR_                         50
+     $_NOT_                         30
+     $_ORNOT_                       33
+     $_OR_                         110
+     $_XNOR_                        59
+     $_XOR_                         98
+
+5.27. Executing CHECK pass (checking for obvious problems).
+Checking module lfm_wavecore_quarter...
+Found and reported 0 problems.
+
+6. Executing CHECK pass (checking for obvious problems).
+Checking module lfm_wavecore_quarter...
+Found and reported 0 problems.
+
+7. Printing statistics.
+
+=== lfm_wavecore_quarter ===
+
+   Number of wires:                818
+   Number of wire bits:           1170
+   Number of public wires:          30
+   Number of public wire bits:     351
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                913
+     $_ANDNOT_                     216
+     $_AND_                         38
+     $_DFFE_PN0P_                   81
+     $_DFF_PN0_                      1
+     $_MUX_                        147
+     $_NAND_                        50
+     $_NOR_                         50
+     $_NOT_                         30
+     $_ORNOT_                       33
+     $_OR_                         110
+     $_XNOR_                        59
+     $_XOR_                         98
+
