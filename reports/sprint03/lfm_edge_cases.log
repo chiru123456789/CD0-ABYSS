@@ -1,0 +1,2 @@
+PASS: 13 LFM edge-case checks
+/mnt/c/Dev/CD0-ABYSS/tb/tb_lfm_edge_cases.sv:137: $finish called at 141000 (1ps)

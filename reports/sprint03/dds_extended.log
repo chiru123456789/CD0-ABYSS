@@ -1,0 +1,3 @@
+VCD info: dumpfile dds_extended.vcd opened for output.
+PASS: 2000 cycles across five frequency configurations, phase offsets and enable holds
+/mnt/c/Dev/CD0-ABYSS/tb/tb_dds_extended.sv:103: $finish called at 20020000 (1ps)

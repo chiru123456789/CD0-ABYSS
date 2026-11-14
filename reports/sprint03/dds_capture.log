@@ -1,0 +1,2 @@
+PASS: Captured 1024 RTL DDS samples
+/mnt/c/Dev/CD0-ABYSS/tb/tb_dds_capture.sv:66: $finish called at 10276000 (1ps)

@@ -1,0 +1,3 @@
+VCD info: dumpfile dds_phase_core.vcd opened for output.
+PASS: 1000 cycles, config changes, hold, wraparound and phase offset
+/mnt/c/Dev/CD0-ABYSS/tb/tb_dds_phase_core.sv:50: $finish called at 10020000 (1ps)

@@ -1,0 +1,3 @@
+VCD info: dumpfile lfm_wavecore.vcd opened for output.
+PASS: 64-sample integrated LFM chirp
+/mnt/c/Dev/CD0-ABYSS/tb/tb_lfm_wavecore.sv:84: $finish called at 676000 (1ps)

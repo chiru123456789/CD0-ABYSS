@@ -1,0 +1,2 @@
+PASS: Captured 64 LFM samples
+/mnt/c/Dev/CD0-ABYSS/tb/tb_lfm_capture.sv:88: $finish called at 676000 (1ps)

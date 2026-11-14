@@ -1,0 +1,2 @@
+PASS: 2468 wavecore equivalence checks
+/mnt/c/Dev/CD0-ABYSS/tb/tb_lfm_wavecore_equivalence.sv:198: $finish called at 24680000 (1ps)

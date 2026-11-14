@@ -1,0 +1,3 @@
+VCD info: dumpfile dds_wavecore.vcd opened for output.
+PASS: 256 ROM addresses and 256 DDS cycles
+/mnt/c/Dev/CD0-ABYSS/tb/tb_dds_wavecore.sv:91: $finish called at 2846000 (1ps)
