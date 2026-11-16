@@ -30,15 +30,19 @@ Simulation results must be labelled by fidelity. A functional model is not proof
 
 ### 2. BenchTwin exploration
 
-BenchTwin is a browser-based virtual electronics bench. First verify whether its current component catalogue contains the exact MCU development board and peripherals we intend to model. Use it only for supported MCU-side wiring/code experiments (for example, GPIO/UART/SPI behaviour) where the exact board/peripheral model exists.
+**Observed by the project operator (2026-11-16):** the BenchTwin catalogue returns 18 results for `RP2040`; it includes the Waveshare RP2040-Zero, which can be added to a circuit and run code. The operator also confirmed that GPIO, UART, and SPI workflows are available in the simulator. Use this board as an RP2040 controller proxy for host-side control experiments.
 
-Do not represent the Renesas SLG47910 as supported unless BenchTwin explicitly lists that device and exposes the required FPGA behaviour. If it does not, keep FPGA validation in Icarus Verilog/Verilator and the Renesas ForgeFPGA toolchain.
+**Fidelity boundary:** Waveshare RP2040-Zero is a separate RP2040 development board, not the RP2040 section of Shrike-lite. It cannot validate Shrike-lite's exact pin multiplexing, six-bit MCU/FPGA link, board-level wiring, or the SLG47910. Do not represent the Renesas SLG47910 as supported unless BenchTwin explicitly lists that device and exposes the required FPGA behaviour. Keep FPGA RTL validation in Icarus Verilog/Verilator and target-specific implementation in Renesas ForgeFPGA tools.
+
+BenchTwin's oscilloscope/serial tools may be used for supported MCU-side functional demonstrations, but simulated traces are not physical electrical measurements. Exact STM32F407 and SLG47910 catalogue support remain unverified; do not substitute a different MCU/FPGA and claim equivalence.
 
 ### 3. Controller firmware model
 
-- Define a portable command interface: `SET_MODE`, `SET_START_FREQ`, `SET_STOP_FREQ`, `SET_SWEEP_RATE`, `SET_AMPLITUDE`, `START`, `STOP`, `STATUS`, and `FAULT_CLEAR`.
-- Define packet framing, field widths, byte order, units, limits, acknowledgement, timeout, and invalid-command behaviour.
-- Build a host-side Python protocol simulator first; only port to an MCU SDK after interface tests pass.
+- [x] Define a portable command interface: `SET_MODE`, `SET_START_FREQ`, `SET_STOP_FREQ`, `SET_SWEEP_RATE`, `SET_AMPLITUDE`, `START`, `STOP`, `STATUS`, and `FAULT_CLEAR`.
+- [x] Define protocol v1 framing, field widths, byte order, units, response codes, and invalid-command behaviour in `docs/Sprint_03B_Controller_Protocol.md`.
+- [x] Add a host-side Python functional model and unit tests under `sim/sprint03b/`.
+- [ ] Execute the protocol test suite in the project WSL environment and archive the result.
+- [ ] Add explicit timeout/retry/duplicate-command behaviour after the command transport and operating requirements are settled.
 - Keep UART as the initial control-link candidate unless measured requirements justify SPI.
 
 ### 4. Sample-stream and analog model
@@ -71,9 +75,9 @@ No MCU purchase decision is final until the software model shows whether the MCU
 
 ## Exit criteria
 
-- [ ] Sprint 02 RTL regression re-run and logs archived.
-- [ ] BenchTwin exact-board support checked; unsupported FPGA behaviour explicitly excluded.
-- [ ] Controller command protocol documented and Python tests pass.
+- [x] Sprint 02 RTL regression re-run and logs archived (10/10 testbenches; Sprint 03A evidence).
+- [ ] BenchTwin RP2040 proxy checked; exact Shrike-lite FPGA behaviour remains excluded pending exact SLG47910 support evidence.
+- [ ] Controller command protocol documented and Python tests pass (documentation and tests authored; local execution pending).
 - [ ] MCU–RP2040 control-link simulator passes normal, malformed, timeout, and reset cases.
 - [ ] DAC/sample-stream model produces repeatable plots and quantitative checks.
 - [ ] Renesas Go Configure Software Hub installed and ForgeFPGA project/bitstream generation verified offline.
@@ -86,3 +90,12 @@ No MCU purchase decision is final until the software model shows whether the MCU
 - No real FPGA programming or MCU flashing.
 - No claims of acoustic transmission, AUV integration, power savings, or hardware timing closure.
 - No final MCU purchase until the DAC and control partition is settled.
+
+
+## Sprint 03B implementation log — 2026-11-16
+
+- BenchTwin catalogue: 18 results for RP2040; Waveshare RP2040-Zero is available and runs code. Project operator confirms GPIO, UART, and SPI are usable in the simulator.
+- Controller protocol v1 and a Python state-machine/frame parser were added. The model includes CRC-16/CCITT-FALSE, fragmented UART stream parsing, configuration commands, ACK/result codes, CW/LFM start validation, status, stop, fault and reset behaviour.
+- Test cases cover CRC reference vector, frame round-trip, fragmented stream, noise/corrupt-frame recovery, invalid frame/version, normal CW and LFM configuration, invalid arguments, fault clearing, status, unknown commands, and reset.
+- Current validation status: source and tests authored; execution in the project WSL environment is still required. No test-pass claim is made yet.
+- No hardware was purchased, wired, powered, flashed, or acoustically tested.
