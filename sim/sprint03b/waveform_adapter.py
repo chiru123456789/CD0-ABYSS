@@ -32,7 +32,7 @@ class WaveformPlan:
 
     @property
     def duration_seconds(self) -> float:
-        return (self.sample_count - 2) / self.sample_rate_hz if self.mode == Mode.LFM else 0.0
+        return (self.sample_count - 1) / self.sample_rate_hz if self.mode == Mode.LFM else 0.0
 
 
 def frequency_to_phase_word(frequency_hz: int, sample_rate_hz: int) -> int:
@@ -47,10 +47,10 @@ def frequency_to_phase_word(frequency_hz: int, sample_rate_hz: int) -> int:
 def build_waveform_plan(config: ControllerConfig, sample_rate_hz: int) -> WaveformPlan:
     """Build parameters for dds_phase_core or lfm_wavecore.
 
-    For LFM, sample_count is intervals + 2: the RTL emits intervals + 1 active
-    samples including both endpoints, then consumes one final advance to assert done.
-    The integer step word is
-    rounded to the nearest representable increment, so realized_stop_hz can
+    For LFM, sample_count is intervals + 1. The RTL presents that many active
+    frequency states, including both endpoints; a subsequent advance asserts done.
+    The integer step word is rounded to the nearest representable increment,
+    so realized_stop_hz can
     differ slightly from the requested stop frequency.
     """
     if sample_rate_hz <= 0:
@@ -80,7 +80,7 @@ def build_waveform_plan(config: ControllerConfig, sample_rate_hz: int) -> Wavefo
     intervals = round(span_hz * sample_rate_hz / config.sweep_rate_hz_per_s)
     if intervals < 1:
         raise WaveformPlanError("requested sweep is shorter than one sample interval")
-    sample_count = intervals + 2
+    sample_count = intervals + 1
     if not 1 <= sample_count <= 0xFFFF:
         raise WaveformPlanError("LFM sample count does not fit the RTL uint16 input")
     step_word = round((stop_word - start_word) / intervals)
