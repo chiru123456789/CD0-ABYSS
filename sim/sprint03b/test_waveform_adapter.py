@@ -27,7 +27,8 @@ class WaveformAdapterTests(unittest.TestCase):
         self.assertEqual(plan.sample_count, 2001)
         self.assertGreater(plan.step_word, 0)
         self.assertAlmostEqual(plan.realized_start_hz, 20_000, delta=0.001)
-        self.assertAlmostEqual(plan.realized_stop_hz, 40_000, delta=0.01)
+        stop_error_bound_hz = (2000 / 2 + 1) * 1_000_000 / (1 << 32)
+        self.assertLessEqual(abs(plan.realized_stop_hz - 40_000), stop_error_bound_hz)
         self.assertAlmostEqual(plan.duration_seconds, 0.002)
 
     def test_rejects_nyquist_and_sample_count_overflow(self):
