@@ -78,6 +78,8 @@ def build_waveform_plan(config: ControllerConfig, sample_rate_hz: int) -> Wavefo
     stop_word = frequency_to_phase_word(config.stop_frequency_hz, sample_rate_hz)
     span_hz = config.stop_frequency_hz - config.start_frequency_hz
     intervals = round(span_hz * sample_rate_hz / config.sweep_rate_hz_per_s)
+    if intervals < 1:
+        raise WaveformPlanError("requested sweep is shorter than one sample interval")
     sample_count = intervals + 2
     if not 1 <= sample_count <= 0xFFFF:
         raise WaveformPlanError("LFM sample count does not fit the RTL uint16 input")
