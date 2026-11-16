@@ -12,7 +12,7 @@
 
 ## LFM terminal-count alignment
 
-The current `lfm_chirp_controller` increments its frequency word on an advance while more than one count remains. Its final advance deasserts `active` and asserts `done` without another frequency increment. Therefore the adapter sets `sample_count = intervals + 2`: this produces `intervals + 1` active frequency samples (including the start and stop endpoints), followed by the terminal advance. This behavior is covered by the adapter's duration and endpoint tests.
+The current `lfm_chirp_controller` loads `samples_remaining` from `sample_count` and exposes that many active frequency states. It increments the frequency word on advances while more than one count remains; the subsequent terminal advance deasserts `active` and asserts `done`. Therefore the adapter sets `sample_count = intervals + 1`, giving `intervals + 1` active states from the start through the stop endpoint. The terminal advance is not counted as an active sample.
 
 ## Assumptions and limitations
 
