@@ -21,10 +21,10 @@ class WaveformAdapterTests(unittest.TestCase):
     def test_lfm_maps_endpoints_and_sweep_rate(self):
         config = ControllerConfig(mode=Mode.LFM, start_frequency_hz=20_000,
                                   stop_frequency_hz=40_000,
-                                  sweep_rate_hz_per_s=10_000,
+                                  sweep_rate_hz_per_s=10_000_000,
                                   amplitude_permille=750)
         plan = build_waveform_plan(config, 1_000_000)
-        self.assertEqual(plan.sample_count, 2002)
+        self.assertEqual(plan.sample_count, 2001)
         self.assertGreater(plan.step_word, 0)
         self.assertAlmostEqual(plan.realized_start_hz, 20_000, delta=0.001)
         self.assertAlmostEqual(plan.realized_stop_hz, 40_000, delta=0.01)
